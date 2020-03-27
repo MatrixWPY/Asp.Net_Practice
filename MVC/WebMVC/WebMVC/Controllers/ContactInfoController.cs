@@ -32,8 +32,7 @@ namespace WebMVC.Controllers
         // GET: ContactInfo/Create
         public ActionResult Create()
         {
-            ContactInfo objContactInfo = new ContactInfo();
-            return View(objContactInfo);
+            return View();
         }
 
         // POST: ContactInfo/Create
@@ -50,11 +49,13 @@ namespace WebMVC.Controllers
                 }
                 else
                 {
+                    ModelState.AddModelError("InsertError", "新增失敗!");
                     return View(objContactInfo);
                 }
             }
             catch
             {
+                ModelState.AddModelError("InsertError", "新增失敗!");
                 return View();
             }
         }
@@ -68,23 +69,26 @@ namespace WebMVC.Controllers
 
         // POST: ContactInfo/Edit/5
         [HttpPost]
-        public ActionResult Edit(ContactInfo objContactInfo)
+        public ActionResult Edit(long ContactInfoID, FormCollection form)
         {
             try
             {
                 // TODO: Add update logic here
-                if (ModelState.IsValid)
+                ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
+                if (null != objContactInfo && TryUpdateModel<ContactInfo>(objContactInfo, "", form.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
                 {
                     UpdateContactInfo(objContactInfo);
                     return RedirectToAction("Index");
                 }
                 else
                 {
+                    ModelState.AddModelError("UpdateError", "更新失敗!");
                     return View(objContactInfo);
                 }
             }
             catch
             {
+                ModelState.AddModelError("UpdateError", "更新失敗!");
                 return View();
             }
         }
@@ -98,16 +102,26 @@ namespace WebMVC.Controllers
 
         // POST: ContactInfo/Delete/5
         [HttpPost]
-        public ActionResult Delete(ContactInfo objContactInfo)
+        public ActionResult Delete(long ContactInfoID, FormCollection form)
         {
             try
             {
                 // TODO: Add delete logic here
-                DeleteContactInfo(objContactInfo);
-                return RedirectToAction("Index");
+                ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
+                if (null != objContactInfo)
+                {
+                    DeleteContactInfo(objContactInfo);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("DeleteError", "刪除失敗!");
+                    return View(objContactInfo);
+                }
             }
             catch
             {
+                ModelState.AddModelError("DeleteError", "刪除失敗!");
                 return View();
             }
         }

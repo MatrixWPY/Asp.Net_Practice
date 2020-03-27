@@ -28,6 +28,7 @@ namespace WebMVC.Models.DB
         public EnumGender? Gender { get; set; }
 
         [DataMember]
+        [RegularExpression("[0-9]{0,127}", ErrorMessage = "限定為0-127個數字")]
         public int? Age { get; set; }
 
         [Required]

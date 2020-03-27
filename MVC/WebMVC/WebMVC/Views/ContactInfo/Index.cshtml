@@ -23,15 +23,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.IsEnable)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.CreateTime)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.UpdateTime)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -55,15 +55,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.IsEnable)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.CreateTime)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.UpdateTime)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { ContactInfoID = item.ContactInfoID }) |
             @Html.ActionLink("Details", "Details", new { ContactInfoID = item.ContactInfoID }) |
