@@ -133,7 +133,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\ContactInfo.cs" />
+    <Compile Include="Models\Data\ContactInfoData.cs" />
+    <Compile Include="Models\Repository\ContactInfoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace WebMVC.Models.DB
+namespace WebMVC.Models.Data
 {
     [Table("Tbl_ContactInfo")]
-    public class ContactInfo
+    public class ContactInfoData
     {
         [Key]
         [DataMember]

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebMVC.Models.DB;
+using WebMVC.Models.Data;
 using Dapper;
 using System.Text;
 
@@ -18,15 +18,15 @@ namespace WebMVC.Controllers
         // GET: ContactInfo
         public ActionResult Index()
         {
-            List<ContactInfo> liContactInfo = GetContactInfo();
-            return View(liContactInfo);
+            List<ContactInfoData> liContactInfoData = GetContactInfo();
+            return View(liContactInfoData);
         }
 
         // GET: ContactInfo/Details/5
         public ActionResult Details(long ContactInfoID)
         {
-            ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
-            return View(objContactInfo);
+            ContactInfoData objContactInfoData = GetContactInfo(ContactInfoID);
+            return View(objContactInfoData);
         }
 
         // GET: ContactInfo/Create
@@ -37,20 +37,20 @@ namespace WebMVC.Controllers
 
         // POST: ContactInfo/Create
         [HttpPost]
-        public ActionResult Create(ContactInfo objContactInfo)
+        public ActionResult Create(ContactInfoData objContactInfoData)
         {
             try
             {
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    AddContactInfo(objContactInfo);
+                    AddContactInfo(objContactInfoData);
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     ModelState.AddModelError("InsertError", "新增失敗!");
-                    return View(objContactInfo);
+                    return View(objContactInfoData);
                 }
             }
             catch
@@ -63,8 +63,8 @@ namespace WebMVC.Controllers
         // GET: ContactInfo/Edit/5
         public ActionResult Edit(long ContactInfoID)
         {
-            ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
-            return View(objContactInfo);
+            ContactInfoData objContactInfoData = GetContactInfo(ContactInfoID);
+            return View(objContactInfoData);
         }
 
         // POST: ContactInfo/Edit/5
@@ -74,16 +74,16 @@ namespace WebMVC.Controllers
             try
             {
                 // TODO: Add update logic here
-                ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
-                if (null != objContactInfo && TryUpdateModel<ContactInfo>(objContactInfo, "", form.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
+                ContactInfoData objContactInfoData = GetContactInfo(ContactInfoID);
+                if (null != objContactInfoData && TryUpdateModel<ContactInfoData>(objContactInfoData, "", form.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
                 {
-                    UpdateContactInfo(objContactInfo);
+                    UpdateContactInfo(objContactInfoData);
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     ModelState.AddModelError("UpdateError", "更新失敗!");
-                    return View(objContactInfo);
+                    return View(objContactInfoData);
                 }
             }
             catch
@@ -96,8 +96,8 @@ namespace WebMVC.Controllers
         // GET: ContactInfo/Delete/5
         public ActionResult Delete(long ContactInfoID)
         {
-            ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
-            return View(objContactInfo);
+            ContactInfoData objContactInfoData = GetContactInfo(ContactInfoID);
+            return View(objContactInfoData);
         }
 
         // POST: ContactInfo/Delete/5
@@ -107,16 +107,16 @@ namespace WebMVC.Controllers
             try
             {
                 // TODO: Add delete logic here
-                ContactInfo objContactInfo = GetContactInfo(ContactInfoID);
-                if (null != objContactInfo)
+                ContactInfoData objContactInfoData = GetContactInfo(ContactInfoID);
+                if (null != objContactInfoData)
                 {
-                    DeleteContactInfo(objContactInfo);
+                    DeleteContactInfo(objContactInfoData);
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     ModelState.AddModelError("DeleteError", "刪除失敗!");
-                    return View(objContactInfo);
+                    return View(objContactInfoData);
                 }
             }
             catch
@@ -126,9 +126,9 @@ namespace WebMVC.Controllers
             }
         }
 
-        private List<ContactInfo> GetContactInfo()
+        private List<ContactInfoData> GetContactInfo()
         {
-            List<ContactInfo> liContactInfo = null;
+            List<ContactInfoData> liContactInfoData = null;
 
             using (var cn = new SqlConnection(ConnectionSet.ConnectionString))
             {
@@ -137,15 +137,15 @@ namespace WebMVC.Controllers
                 sbSQL.AppendLine("where IsEnable=1");
                 sbSQL.AppendLine("order by ContactInfoID desc");
 
-                liContactInfo = cn.Query<ContactInfo>(sbSQL.ToString()).ToList();
+                liContactInfoData = cn.Query<ContactInfoData>(sbSQL.ToString()).ToList();
             }
 
-            return liContactInfo;
+            return liContactInfoData;
         }
 
-        private ContactInfo GetContactInfo(long ContactInfoID)
+        private ContactInfoData GetContactInfo(long ContactInfoID)
         {
-            ContactInfo objContactInfo = null;
+            ContactInfoData objContactInfoData = null;
 
             using (var cn = new SqlConnection(ConnectionSet.ConnectionString))
             {
@@ -154,13 +154,13 @@ namespace WebMVC.Controllers
                 sbSQL.AppendLine("where ContactInfoID=@ContactInfoID");
                 sbSQL.AppendLine("order by ContactInfoID desc");
 
-                objContactInfo = cn.Query<ContactInfo>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
+                objContactInfoData = cn.Query<ContactInfoData>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
             }
 
-            return objContactInfo;
+            return objContactInfoData;
         }
 
-        private bool AddContactInfo(ContactInfo objContactInfo)
+        private bool AddContactInfo(ContactInfoData objContactInfoData)
         {
             bool bolResult = false;
 
@@ -168,12 +168,12 @@ namespace WebMVC.Controllers
             {
                 using (var cn = new SqlConnection(ConnectionSet.ConnectionString))
                 {
-                    objContactInfo.IsEnable = true;
-                    objContactInfo.CreateTime = DateTime.Now;
+                    objContactInfoData.IsEnable = true;
+                    objContactInfoData.CreateTime = DateTime.Now;
 
-                    long? ContactInfoID = cn.Insert(objContactInfo);
+                    long? ContactInfoID = cn.Insert(objContactInfoData);
 
-                    objContactInfo.ContactInfoID = Convert.ToInt64(ContactInfoID);
+                    objContactInfoData.ContactInfoID = Convert.ToInt64(ContactInfoID);
                 }
 
                 bolResult = true;
@@ -186,7 +186,7 @@ namespace WebMVC.Controllers
             return bolResult;
         }
 
-        private bool UpdateContactInfo(ContactInfo objContactInfo)
+        private bool UpdateContactInfo(ContactInfoData objContactInfoData)
         {
             bool bolResult = false;
 
@@ -194,9 +194,9 @@ namespace WebMVC.Controllers
             {
                 using (var cn = new SqlConnection(ConnectionSet.ConnectionString))
                 {
-                    objContactInfo.UpdateTime = DateTime.Now;
+                    objContactInfoData.UpdateTime = DateTime.Now;
 
-                    cn.Update(objContactInfo);
+                    cn.Update(objContactInfoData);
                 }
 
                 bolResult = true;
@@ -209,7 +209,7 @@ namespace WebMVC.Controllers
             return bolResult;
         }
 
-        private bool DeleteContactInfo(ContactInfo objContactInfo)
+        private bool DeleteContactInfo(ContactInfoData objContactInfoData)
         {
             bool bolResult = false;
 
@@ -217,7 +217,7 @@ namespace WebMVC.Controllers
             {
                 using (var cn = new SqlConnection(ConnectionSet.ConnectionString))
                 {
-                    cn.Delete(objContactInfo);
+                    cn.Delete(objContactInfoData);
                 }
 
                 bolResult = true;
