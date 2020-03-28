@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Models\Data\ContactInfoData.cs" />
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
+    <Compile Include="Models\Repository\DapperBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

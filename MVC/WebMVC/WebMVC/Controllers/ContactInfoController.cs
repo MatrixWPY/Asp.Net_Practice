@@ -31,7 +31,6 @@ namespace WebMVC.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
                     ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
@@ -63,7 +62,6 @@ namespace WebMVC.Controllers
         {
             try
             {
-                // TODO: Add update logic here
                 ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
                 ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
                 if (null != objContactInfoData && TryUpdateModel<ContactInfoData>(objContactInfoData, "", form.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
@@ -96,7 +94,6 @@ namespace WebMVC.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
                 ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
                 if (null != objContactInfoData)
