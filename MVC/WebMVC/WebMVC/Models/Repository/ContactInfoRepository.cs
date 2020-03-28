@@ -1,9 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using WebMVC.Models.Data;
@@ -12,7 +10,7 @@ namespace WebMVC.Models.Repository
 {
     public class ContactInfoRepository : DapperBaseRepository
     {
-        public ContactInfoRepository(IDbConnection connection = null) : base(connection)
+        public ContactInfoRepository(IDbConnection IConnection = null) : base(IConnection)
         {
         }
 
@@ -20,14 +18,14 @@ namespace WebMVC.Models.Repository
         {
             List<ContactInfoData> liContactInfoData = null;
 
-            using (var cn = GetOpenConnection())
+            using (var db = GetDBConnection())
             {
                 StringBuilder sbSQL = new StringBuilder();
                 sbSQL.AppendLine("select * from Tbl_ContactInfo");
                 sbSQL.AppendLine("where IsEnable=1");
                 sbSQL.AppendLine("order by ContactInfoID desc");
 
-                liContactInfoData = cn.Query<ContactInfoData>(sbSQL.ToString()).ToList();
+                liContactInfoData = db.Query<ContactInfoData>(sbSQL.ToString()).ToList();
             }
 
             return liContactInfoData;
@@ -37,33 +35,33 @@ namespace WebMVC.Models.Repository
         {
             ContactInfoData objContactInfoData = null;
 
-            using (var cn = GetOpenConnection())
+            using (var db = GetDBConnection())
             {
                 StringBuilder sbSQL = new StringBuilder();
                 sbSQL.AppendLine("select * from Tbl_ContactInfo");
                 sbSQL.AppendLine("where ContactInfoID=@ContactInfoID");
                 sbSQL.AppendLine("order by ContactInfoID desc");
 
-                objContactInfoData = cn.Query<ContactInfoData>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
+                objContactInfoData = db.Query<ContactInfoData>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
             }
 
             return objContactInfoData;
         }
 
-        public bool AddContactInfo(ContactInfoData objContactInfoData, IDbTransaction transaction = null)
+        public bool AddContactInfo(ContactInfoData objContactInfoData, IDbTransaction ITransaction = null)
         {
             bool bolResult = false;
 
             try
             {
-                if (transaction == null)
+                if (ITransaction == null)
                 {
-                    using (var cn = GetOpenConnection())
+                    using (var db = GetDBConnection())
                     {
                         objContactInfoData.IsEnable = true;
                         objContactInfoData.CreateTime = DateTime.Now;
 
-                        long? ContactInfoID = cn.Insert(objContactInfoData);
+                        long? ContactInfoID = db.Insert(objContactInfoData);
 
                         objContactInfoData.ContactInfoID = Convert.ToInt64(ContactInfoID);
                     }
@@ -73,7 +71,7 @@ namespace WebMVC.Models.Repository
                     objContactInfoData.IsEnable = true;
                     objContactInfoData.CreateTime = DateTime.Now;
 
-                    long? ContactInfoID = GetOpenConnection().Insert(objContactInfoData);
+                    long? ContactInfoID = GetDBConnection().Insert(objContactInfoData, ITransaction);
 
                     objContactInfoData.ContactInfoID = Convert.ToInt64(ContactInfoID);
                 }
@@ -88,26 +86,26 @@ namespace WebMVC.Models.Repository
             return bolResult;
         }
 
-        public bool UpdateContactInfo(ContactInfoData objContactInfoData, IDbTransaction transaction = null)
+        public bool UpdateContactInfo(ContactInfoData objContactInfoData, IDbTransaction ITransaction = null)
         {
             bool bolResult = false;
 
             try
             {
-                if (transaction == null)
+                if (ITransaction == null)
                 {
-                    using (var cn = GetOpenConnection())
+                    using (var db = GetDBConnection())
                     {
                         objContactInfoData.UpdateTime = DateTime.Now;
 
-                        cn.Update(objContactInfoData);
+                        db.Update(objContactInfoData);
                     }
                 }
                 else
                 {
                     objContactInfoData.UpdateTime = DateTime.Now;
 
-                    GetOpenConnection().Update(objContactInfoData);
+                    GetDBConnection().Update(objContactInfoData, ITransaction);
                 }
 
                 bolResult = true;
@@ -120,22 +118,22 @@ namespace WebMVC.Models.Repository
             return bolResult;
         }
 
-        public bool DeleteContactInfo(ContactInfoData objContactInfoData, IDbTransaction transaction = null)
+        public bool DeleteContactInfo(ContactInfoData objContactInfoData, IDbTransaction ITransaction = null)
         {
             bool bolResult = false;
 
             try
             {
-                if (transaction == null)
+                if (ITransaction == null)
                 {
-                    using (var cn = GetOpenConnection())
+                    using (var db = GetDBConnection())
                     {
-                        cn.Delete(objContactInfoData);
+                        db.Delete(objContactInfoData);
                     }
                 }
                 else
                 {
-                    GetOpenConnection().Delete(objContactInfoData);
+                    GetDBConnection().Delete(objContactInfoData, ITransaction);
                 }
 
                 bolResult = true;

@@ -65,9 +65,9 @@
             @Html.DisplayFor(modelItem => item.UpdateTime)
         </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { ContactInfoID = item.ContactInfoID }) |
-            @Html.ActionLink("Details", "Details", new { ContactInfoID = item.ContactInfoID }) |
-            @Html.ActionLink("Delete", "Delete", new { ContactInfoID = item.ContactInfoID })
+            @Html.ActionLink("Details", "Details", new { lContactInfoID = item.ContactInfoID }) |
+            @Html.ActionLink("Edit", "Edit", new { lContactInfoID = item.ContactInfoID }) |
+            @Html.ActionLink("Delete", "Delete", new { lContactInfoID = item.ContactInfoID })
         </td>
     </tr>
 }

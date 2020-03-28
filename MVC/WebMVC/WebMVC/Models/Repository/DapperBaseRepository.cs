@@ -9,32 +9,32 @@ namespace WebMVC.Models.Repository
     public abstract class DapperBaseRepository
     {
         private static readonly ConnectionStringSettings ConnectionSet = ConfigurationManager.ConnectionStrings["DBConnect"];
-        private IDbConnection Connection;
+        private IDbConnection DBConnection;
 
-        protected DapperBaseRepository(IDbConnection gConnection = null)
+        protected DapperBaseRepository(IDbConnection IConnection = null)
         {
-            if (gConnection != null)
+            if (IConnection != null)
             {
-                Connection = gConnection;
+                DBConnection = IConnection;
             }
         }
 
-        protected IDbConnection GetOpenConnection()
+        protected IDbConnection GetDBConnection()
         {
             if (string.IsNullOrWhiteSpace(ConnectionSet.ConnectionString))
             {
                 throw new Exception("ConnectionString 必須先在 Web.config 設定!");
             }
 
-            if (null == Connection || string.IsNullOrWhiteSpace(Connection.ConnectionString))
+            if (null == DBConnection || string.IsNullOrWhiteSpace(DBConnection.ConnectionString))
             {
-                Connection = new SqlConnection(ConnectionSet.ConnectionString);
+                DBConnection = new SqlConnection(ConnectionSet.ConnectionString);
                 SimpleCRUD.SetDialect(SimpleCRUD.Dialect.SQLServer);
 
-                Connection.Open();
+                DBConnection.Open();
             }
 
-            return this.Connection;
+            return DBConnection;
         }
     }
 }

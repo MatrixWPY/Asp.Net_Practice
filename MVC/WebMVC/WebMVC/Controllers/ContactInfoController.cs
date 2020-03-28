@@ -14,10 +14,10 @@ namespace WebMVC.Controllers
             return View(liContactInfoData);
         }
 
-        public ActionResult Details(long ContactInfoID)
+        public ActionResult Details(long lContactInfoID)
         {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
+            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(lContactInfoID);
             return View(objContactInfoData);
         }
 
@@ -50,21 +50,21 @@ namespace WebMVC.Controllers
             }
         }
 
-        public ActionResult Edit(long ContactInfoID)
+        public ActionResult Edit(long lContactInfoID)
         {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
+            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(lContactInfoID);
             return View(objContactInfoData);
         }
 
         [HttpPost]
-        public ActionResult Edit(long ContactInfoID, FormCollection form)
+        public ActionResult Edit(long lContactInfoID, FormCollection objFormCollection)
         {
             try
             {
                 ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
-                if (null != objContactInfoData && TryUpdateModel<ContactInfoData>(objContactInfoData, "", form.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
+                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(lContactInfoID);
+                if (null != objContactInfoData && TryUpdateModel<ContactInfoData>(objContactInfoData, "", objFormCollection.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
                 {
                     objContactInfoRepository.UpdateContactInfo(objContactInfoData);
                     return RedirectToAction("Index");
@@ -82,20 +82,20 @@ namespace WebMVC.Controllers
             }
         }
 
-        public ActionResult Delete(long ContactInfoID)
+        public ActionResult Delete(long lContactInfoID)
         {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
+            ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(lContactInfoID);
             return View(objContactInfoData);
         }
 
         [HttpPost]
-        public ActionResult Delete(long ContactInfoID, FormCollection form)
+        public ActionResult Delete(long lContactInfoID, FormCollection objFormCollection)
         {
             try
             {
                 ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(ContactInfoID);
+                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(lContactInfoID);
                 if (null != objContactInfoData)
                 {
                     objContactInfoRepository.DeleteContactInfo(objContactInfoData);
