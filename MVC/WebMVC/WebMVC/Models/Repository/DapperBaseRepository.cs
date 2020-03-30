@@ -13,7 +13,7 @@ namespace WebMVC.Models.Repository
 
         protected DapperBaseRepository(IDbConnection IConnection = null)
         {
-            if (IConnection != null)
+            if (null != IConnection)
             {
                 DBConnection = IConnection;
             }

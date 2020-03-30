@@ -23,7 +23,7 @@ namespace WebMVC.Models.Repository
                 StringBuilder sbSQL = new StringBuilder();
                 sbSQL.AppendLine("select * from Tbl_ContactInfo");
                 sbSQL.AppendLine("where IsEnable=1");
-                sbSQL.AppendLine("order by ContactInfoID desc");
+                sbSQL.AppendLine("order by ContactInfoID asc");
 
                 liContactInfoData = db.Query<ContactInfoData>(sbSQL.ToString()).ToList();
             }
@@ -54,7 +54,7 @@ namespace WebMVC.Models.Repository
 
             try
             {
-                if (ITransaction == null)
+                if (null == ITransaction)
                 {
                     using (var db = GetDBConnection())
                     {
@@ -92,7 +92,7 @@ namespace WebMVC.Models.Repository
 
             try
             {
-                if (ITransaction == null)
+                if (null == ITransaction)
                 {
                     using (var db = GetDBConnection())
                     {
@@ -124,7 +124,7 @@ namespace WebMVC.Models.Repository
 
             try
             {
-                if (ITransaction == null)
+                if (null == ITransaction)
                 {
                     using (var db = GetDBConnection())
                     {

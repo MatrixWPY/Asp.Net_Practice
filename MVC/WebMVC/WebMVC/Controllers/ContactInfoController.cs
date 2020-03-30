@@ -27,6 +27,7 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ContactInfoData objContactInfoData)
         {
             try
@@ -58,6 +59,7 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(long lContactInfoID, FormCollection objFormCollection)
         {
             try
@@ -90,6 +92,7 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(long lContactInfoID, FormCollection objFormCollection)
         {
             try
