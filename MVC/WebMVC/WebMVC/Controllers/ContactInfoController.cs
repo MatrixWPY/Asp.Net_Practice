@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using WebMVC.Filters;
 using WebMVC.Models.Data;
 using WebMVC.Models.Repository;
 
@@ -113,6 +114,56 @@ namespace WebMVC.Controllers
             catch
             {
                 ModelState.AddModelError("DeleteError", "刪除失敗!");
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_AjaxFormPost(ContactInfoData objContactInfoData)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+                    objContactInfoRepository.AddContactInfo(objContactInfoData);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("InsertError", "新增失敗!");
+                    return View("Create", objContactInfoData);
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("InsertError", "新增失敗!");
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [AjaxValidateAntiForgeryToken]
+        public ActionResult Create_AjaxModelPost(ContactInfoData objContactInfoData)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+                    objContactInfoRepository.AddContactInfo(objContactInfoData);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("InsertError", "新增失敗!");
+                    return View("Create", objContactInfoData);
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("InsertError", "新增失敗!");
                 return View();
             }
         }
