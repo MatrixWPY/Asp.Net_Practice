@@ -11,11 +11,11 @@ namespace WebMVC.Models.Repository
         private static readonly ConnectionStringSettings ConnectionSet = ConfigurationManager.ConnectionStrings["DBConnect"];
         private IDbConnection DBConnection;
 
-        protected DapperBaseRepository(IDbConnection IConnection = null)
+        protected DapperBaseRepository(IDbConnection objConnect = null)
         {
-            if (null != IConnection)
+            if (null != objConnect)
             {
-                DBConnection = IConnection;
+                DBConnection = objConnect;
             }
         }
 
