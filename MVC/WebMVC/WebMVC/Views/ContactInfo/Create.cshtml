@@ -107,7 +107,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#btnAjaxFormPost").on('click', function (e) {
-                var t
                 if ($("#formPost").valid())
                 {
                     $.ajax({
@@ -118,7 +117,7 @@
                             //alert(result);
                         },
                         error: function (result) {
-                            //alert(result);
+                            console.log("Ajax Post Error!");
                         }
                     });
                 }
@@ -148,7 +147,7 @@
                             //alert(result);
                         },
                         error: function (result) {
-                            //alert(result);
+                            console.log("Ajax Post Error!");
                         }
                     });
                 }
