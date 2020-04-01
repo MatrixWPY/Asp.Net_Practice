@@ -131,7 +131,11 @@ namespace WebMVC.Controllers
                 {
                     ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
                     objContactInfoRepository.AddContactInfo(objContactInfoData);
-                    return RedirectToAction("Index");
+                    var returnData = new
+                    {
+                        IsSuccess = true
+                    };
+                    return Content(JsonConvert.SerializeObject(returnData), "application/json");
                 }
                 else
                 {
@@ -165,7 +169,11 @@ namespace WebMVC.Controllers
                 {
                     ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
                     objContactInfoRepository.AddContactInfo(objContactInfoData);
-                    return RedirectToAction("Index");
+                    var returnData = new
+                    {
+                        IsSuccess = true
+                    };
+                    return Content(JsonConvert.SerializeObject(returnData), "application/json");
                 }
                 else
                 {

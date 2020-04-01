@@ -114,7 +114,11 @@
                         url: "/ContactInfo/Create_AjaxFormPost",
                         data: $("#formCreate").serialize(),
                         success: function (result) {
-                            if (!result.IsSuccess)
+                            if (result.IsSuccess)
+                            {
+                                window.location = "@Url.Action("Index", "ContactInfo")";
+                            }
+                            else
                             {
                                 if (result.ModelStateErrors != null) {
                                     //$("#formCreate").validate().showErrors(result.ModelStateErrors);
@@ -160,7 +164,11 @@
                         data: JSON.stringify(reqModel),
                         contentType: "application/json",
                         success: function (result) {
-                            if (!result.IsSuccess)
+                            if (result.IsSuccess)
+                            {
+                                window.location = "@Url.Action("Index", "ContactInfo")";
+                            }
+                            else
                             {
                                 if (result.ModelStateErrors != null)
                                 {
