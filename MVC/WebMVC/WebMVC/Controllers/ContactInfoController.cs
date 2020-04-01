@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Filters;
 using WebMVC.Models.Data;
@@ -48,7 +51,7 @@ namespace WebMVC.Controllers
             catch
             {
                 ModelState.AddModelError("InsertError", "新增失敗!");
-                return View();
+                return View(objContactInfoData);
             }
         }
 
@@ -133,13 +136,22 @@ namespace WebMVC.Controllers
                 else
                 {
                     ModelState.AddModelError("InsertError", "新增失敗!");
-                    return View("Create", objContactInfoData);
+                    var returnData = new
+                    {
+                        IsSuccess = false,
+                        ModelStateErrors = ModelState.Where(p => p.Value.Errors.Count > 0).ToDictionary(p => p.Key, p => p.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                    };
+                    return Content(JsonConvert.SerializeObject(returnData), "application/json");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                ModelState.AddModelError("InsertError", "新增失敗!");
-                return View();
+                var returnData = new
+                {
+                    IsSuccess = false,
+                    ExceptionMsg = ex.Message
+                };
+                return Content(JsonConvert.SerializeObject(returnData), "application/json");
             }
         }
 
@@ -158,13 +170,22 @@ namespace WebMVC.Controllers
                 else
                 {
                     ModelState.AddModelError("InsertError", "新增失敗!");
-                    return View("Create", objContactInfoData);
+                    var returnData = new
+                    {
+                        IsSuccess = false,
+                        ModelStateErrors = ModelState.Where(p => p.Value.Errors.Count > 0).ToDictionary(p => p.Key, p => p.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                    };
+                    return Content(JsonConvert.SerializeObject(returnData), "application/json");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                ModelState.AddModelError("InsertError", "新增失敗!");
-                return View();
+                var returnData = new
+                {
+                    IsSuccess = false,
+                    ExceptionMsg = ex.Message
+                };
+                return Content(JsonConvert.SerializeObject(returnData), "application/json");
             }
         }
     }

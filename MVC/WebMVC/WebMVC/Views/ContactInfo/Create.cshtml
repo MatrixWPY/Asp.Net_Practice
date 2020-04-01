@@ -1,6 +1,6 @@
 ﻿@model WebMVC.Models.Data.ContactInfoData
 
-@using (Html.BeginForm("Create", "ContactInfo", FormMethod.Post, new { id = "formPost" }))
+@using (Html.BeginForm("Create", "ContactInfo", FormMethod.Post, new { id = "formCreate" }))
 {
     @Html.AntiForgeryToken()
 
@@ -107,14 +107,30 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#btnAjaxFormPost").on('click', function (e) {
-                if ($("#formPost").valid())
+                if ($("#formCreate").valid())
                 {
                     $.ajax({
                         type: "POST",
                         url: "/ContactInfo/Create_AjaxFormPost",
-                        data: $("#formPost").serialize(),
+                        data: $("#formCreate").serialize(),
                         success: function (result) {
-                            //alert(result);
+                            if (!result.IsSuccess)
+                            {
+                                if (result.ModelStateErrors != null) {
+                                    //$("#formCreate").validate().showErrors(result.ModelStateErrors);
+                                    $("#formCreate").validate().showErrors({
+                                        Name: result.ModelStateErrors.Name,
+                                        PhoneNo: result.ModelStateErrors.PhoneNo,
+                                        Address: result.ModelStateErrors.Address
+                                    });
+                                    alert(result.ModelStateErrors.InsertError);
+                                }
+                                else
+                                {
+                                    alert("Fail!");
+                                    console.log(result.ExceptionMsg);
+                                }
+                            }
                         },
                         error: function (result) {
                             console.log("Ajax Post Error!");
@@ -124,7 +140,7 @@
             });
 
             $("#btnAjaxModelPost").on('click', function (e) {
-                if ($("#formPost").valid())
+                if ($("#formCreate").valid())
                 {
                     var reqModel = {
                         Name: $("#Name").val(),
@@ -144,7 +160,24 @@
                         data: JSON.stringify(reqModel),
                         contentType: "application/json",
                         success: function (result) {
-                            //alert(result);
+                            if (!result.IsSuccess)
+                            {
+                                if (result.ModelStateErrors != null)
+                                {
+                                    //$("#formCreate").validate().showErrors(result.ModelStateErrors);
+                                    $("#formCreate").validate().showErrors({
+                                        Name: result.ModelStateErrors.Name,
+                                        PhoneNo: result.ModelStateErrors.PhoneNo,
+                                        Address: result.ModelStateErrors.Address
+                                    });
+                                    alert(result.ModelStateErrors.InsertError);
+                                }
+                                else
+                                {
+                                    alert("Fail!");
+                                    console.log(result.ExceptionMsg);
+                                }
+                            }
                         },
                         error: function (result) {
                             console.log("Ajax Post Error!");
