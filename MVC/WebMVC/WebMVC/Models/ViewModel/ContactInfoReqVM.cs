@@ -1,6 +1,6 @@
 ﻿namespace WebMVC.Models.ViewModel
 {
-    public class ContactInfoReqVM : DataTablesReqVM
+    public class ContactInfoReqVM : DataTableReqVM
     {
     }
 }

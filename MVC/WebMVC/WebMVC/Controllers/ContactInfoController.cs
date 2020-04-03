@@ -21,11 +21,17 @@ namespace WebMVC.Controllers
         [AjaxValidateAntiForgeryToken]
         public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
         {
+            DataTableQueryData objDataTableQueryData = new DataTableQueryData();
+            objDataTableQueryData.DataTableCondition.PageStartRow = objContactInfoReqVM.Start;
+            objDataTableQueryData.DataTableCondition.PageRowCnt = objContactInfoReqVM.Length;
+            objDataTableQueryData.DataTableCondition.OrderColumn = objContactInfoReqVM.OrderBy;
+            objDataTableQueryData.DataTableCondition.OrderDir = objContactInfoReqVM.OrderDir.ToString();
+
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfo(objContactInfoReqVM);
+            List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfoByCondition(objDataTableQueryData);
 
             int iTotalCount = (liContactInfoExData.Any() ? liContactInfoExData.Select(e => e.TotalCount).FirstOrDefault() : 0);
-            var result = new DataTablesResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, liContactInfoExData);
+            var result = new DataTableResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, liContactInfoExData);
 
             return Content(JsonConvert.SerializeObject(result), "application/json");
         }

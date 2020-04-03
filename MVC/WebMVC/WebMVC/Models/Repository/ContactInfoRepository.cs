@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using WebMVC.Models.Data;
-using WebMVC.Models.ViewModel;
 
 namespace WebMVC.Models.Repository
 {
@@ -15,7 +14,7 @@ namespace WebMVC.Models.Repository
         {
         }
 
-        public List<ContactInfoExData> GetContactInfo(ContactInfoReqVM objContactInfoReqVM)
+        public List<ContactInfoExData> GetContactInfoByCondition(DataTableQueryData objDataTableQueryData)
         {
             List<ContactInfoExData> liContactInfoExData = null;
 
@@ -25,9 +24,10 @@ namespace WebMVC.Models.Repository
                 {
                     StringBuilder sbSQL = new StringBuilder();
                     sbSQL.AppendLine("SELECT *, (SELECT COUNT(1) FROM Tbl_ContactInfo) AS TotalCount FROM Tbl_ContactInfo");
-                    sbSQL.AppendLine("WHERE IsEnable=1");
+                    sbSQL.AppendLine("WHERE 1=1");
+                    sbSQL.AppendLine("AND IsEnable=1");
 
-                    string strSort = objContactInfoReqVM.OrderBy + " " + objContactInfoReqVM.OrderDir;
+                    string strSort = objDataTableQueryData.DataTableCondition.OrderColumn + " " + objDataTableQueryData.DataTableCondition.OrderDir;
                     if (!string.IsNullOrWhiteSpace(strSort))
                     {
                         sbSQL.AppendLine("ORDER BY");
@@ -37,7 +37,7 @@ namespace WebMVC.Models.Repository
 
                     sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
 
-                    liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objContactInfoReqVM.Start, Length = objContactInfoReqVM.Length }).ToList();
+                    liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objDataTableQueryData.DataTableCondition.PageStartRow, Length = objDataTableQueryData.DataTableCondition.PageRowCnt }).ToList();
                 }
             }
             catch (Exception ex)

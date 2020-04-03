@@ -136,11 +136,12 @@
     </Compile>
     <Compile Include="Models\Data\ContactInfoData.cs" />
     <Compile Include="Models\Data\ContactInfoExData.cs" />
+    <Compile Include="Models\Data\DataTableQueryData.cs" />
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
     <Compile Include="Models\Repository\DapperBaseRepository.cs" />
     <Compile Include="Models\ViewModel\ContactInfoReqVM.cs" />
-    <Compile Include="Models\ViewModel\DataTablesReqVM.cs" />
-    <Compile Include="Models\ViewModel\DataTablesResVM.cs" />
+    <Compile Include="Models\ViewModel\DataTableReqVM.cs" />
+    <Compile Include="Models\ViewModel\DataTableResVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

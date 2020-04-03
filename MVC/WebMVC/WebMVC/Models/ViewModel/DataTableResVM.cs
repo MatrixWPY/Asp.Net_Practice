@@ -6,7 +6,7 @@ namespace WebMVC.Models.ViewModel
     ///     DataTable的返回信息
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class DataTablesResVM<TEntity>
+    public class DataTableResVM<TEntity>
     {
         /// <summary>
         ///     构造函数
@@ -15,7 +15,7 @@ namespace WebMVC.Models.ViewModel
         /// <param name="recordsTotal0">总共记录数</param>
         /// <param name="recordsFiltered0">过滤后的记录数</param>
         /// <param name="data0">数据</param>
-        public DataTablesResVM(int draw0, int recordsTotal0, int recordsFiltered0, IReadOnlyList<TEntity> data0)
+        public DataTableResVM(int draw0, int recordsTotal0, int recordsFiltered0, IReadOnlyList<TEntity> data0)
         {
             draw = draw0;
             recordsTotal = recordsTotal0;
@@ -27,7 +27,7 @@ namespace WebMVC.Models.ViewModel
         ///     构造函数
         /// </summary>
         /// <param name="error0">服务器错误信息</param>
-        public DataTablesResVM(string error0)
+        public DataTableResVM(string error0)
         {
             error = error0;
         }

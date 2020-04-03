@@ -6,7 +6,7 @@ namespace WebMVC.Models.ViewModel
     /// <summary>
     ///     DataTables参数
     /// </summary>
-    public class DataTablesReqVM
+    public class DataTableReqVM
     {
         /// <summary>
         ///     请求次数计数器
