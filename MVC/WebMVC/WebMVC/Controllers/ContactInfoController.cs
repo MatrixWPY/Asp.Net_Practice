@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Filters;
@@ -21,10 +22,10 @@ namespace WebMVC.Controllers
         public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
         {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            ContactInfoResVM objContactInfoResVM = objContactInfoRepository.GetContactInfo(objContactInfoReqVM);
+            List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfo(objContactInfoReqVM);
 
-            int iTotalCount = (objContactInfoResVM.liContactInfoData.Any() ? objContactInfoResVM.liContactInfoData.Select(e => e.TotalCount).FirstOrDefault() : 0);
-            var result = new DataTablesResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, objContactInfoResVM.liContactInfoData);
+            int iTotalCount = (liContactInfoExData.Any() ? liContactInfoExData.Select(e => e.TotalCount).FirstOrDefault() : 0);
+            var result = new DataTablesResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, liContactInfoExData);
 
             return Content(JsonConvert.SerializeObject(result), "application/json");
         }

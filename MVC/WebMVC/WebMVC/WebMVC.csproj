@@ -139,7 +139,6 @@
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
     <Compile Include="Models\Repository\DapperBaseRepository.cs" />
     <Compile Include="Models\ViewModel\ContactInfoReqVM.cs" />
-    <Compile Include="Models\ViewModel\ContactInfoResVM.cs" />
     <Compile Include="Models\ViewModel\DataTablesReqVM.cs" />
     <Compile Include="Models\ViewModel\DataTablesResVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

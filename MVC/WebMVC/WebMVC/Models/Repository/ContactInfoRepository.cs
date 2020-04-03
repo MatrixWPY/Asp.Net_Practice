@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,9 @@ namespace WebMVC.Models.Repository
         {
         }
 
-        public ContactInfoResVM GetContactInfo(ContactInfoReqVM objContactInfoReqVM)
+        public List<ContactInfoExData> GetContactInfo(ContactInfoReqVM objContactInfoReqVM)
         {
-            ContactInfoResVM objContactInfoResVM = new ContactInfoResVM();
+            List<ContactInfoExData> liContactInfoExData = null;
 
             try
             {
@@ -36,7 +37,7 @@ namespace WebMVC.Models.Repository
 
                     sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
 
-                    objContactInfoResVM.liContactInfoData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objContactInfoReqVM.Start, Length = objContactInfoReqVM.Length }).ToList();
+                    liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objContactInfoReqVM.Start, Length = objContactInfoReqVM.Length }).ToList();
                 }
             }
             catch (Exception ex)
@@ -44,7 +45,7 @@ namespace WebMVC.Models.Repository
                 throw ex;
             }
 
-            return objContactInfoResVM;
+            return liContactInfoExData;
         }
 
         public ContactInfoData GetContactInfo(long ContactInfoID)
