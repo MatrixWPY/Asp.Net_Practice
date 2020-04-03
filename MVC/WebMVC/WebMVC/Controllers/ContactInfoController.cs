@@ -17,6 +17,7 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
+        [AjaxValidateAntiForgeryToken]
         public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
         {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();

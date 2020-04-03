@@ -36,7 +36,10 @@
                 processing: true,
                 ajax: {
                     type: "POST",
-                    url: "@Url.Action("Index", "ContactInfo")"
+                    url: "@Url.Action("Index", "ContactInfo")",
+                    headers: {
+                        "RequestVerificationToken": "@CommonRazorFunctions.GetAntiForgeryToken()"
+                    }
                 },
                 columnDefs: [{
                     targets: -1,//-1表示最后一行
