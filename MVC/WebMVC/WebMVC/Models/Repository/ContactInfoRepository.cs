@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using WebMVC.Models.Data;
+using WebMVC.Models.ViewModel;
 
 namespace WebMVC.Models.Repository
 {
@@ -14,35 +14,58 @@ namespace WebMVC.Models.Repository
         {
         }
 
-        public List<ContactInfoData> GetContactInfo()
+        public ContactInfoResVM GetContactInfo(ContactInfoReqVM objContactInfoReqVM)
         {
-            List<ContactInfoData> liContactInfoData = null;
+            ContactInfoResVM objContactInfoResVM = new ContactInfoResVM();
 
-            using (var objConnect = GetDBConnection())
+            try
             {
-                StringBuilder sbSQL = new StringBuilder();
-                sbSQL.AppendLine("select * from Tbl_ContactInfo");
-                sbSQL.AppendLine("where IsEnable=1");
-                sbSQL.AppendLine("order by ContactInfoID asc");
+                using (var objConnect = GetDBConnection())
+                {
+                    StringBuilder sbSQL = new StringBuilder();
+                    sbSQL.AppendLine("SELECT *, (SELECT COUNT(1) FROM Tbl_ContactInfo) AS TotalCount FROM Tbl_ContactInfo");
+                    sbSQL.AppendLine("WHERE IsEnable=1");
 
-                liContactInfoData = objConnect.Query<ContactInfoData>(sbSQL.ToString()).ToList();
+                    string strSort = objContactInfoReqVM.OrderBy + " " + objContactInfoReqVM.OrderDir;
+                    if (!string.IsNullOrWhiteSpace(strSort))
+                    {
+                        sbSQL.AppendLine("ORDER BY");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Name ASC' THEN Name END ASC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Name DESC' THEN Name END DESC");
+                    }
+
+                    sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
+
+                    objContactInfoResVM.liContactInfoData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objContactInfoReqVM.Start, Length = objContactInfoReqVM.Length }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            return liContactInfoData;
+            return objContactInfoResVM;
         }
 
         public ContactInfoData GetContactInfo(long ContactInfoID)
         {
             ContactInfoData objContactInfoData = null;
 
-            using (var objConnect = GetDBConnection())
+            try
             {
-                StringBuilder sbSQL = new StringBuilder();
-                sbSQL.AppendLine("select * from Tbl_ContactInfo");
-                sbSQL.AppendLine("where ContactInfoID=@ContactInfoID");
-                sbSQL.AppendLine("order by ContactInfoID desc");
+                using (var objConnect = GetDBConnection())
+                {
+                    StringBuilder sbSQL = new StringBuilder();
+                    sbSQL.AppendLine("SELECT * FROM Tbl_ContactInfo");
+                    sbSQL.AppendLine("WHERE ContactInfoID=@ContactInfoID");
+                    sbSQL.AppendLine("ORDER BY ContactInfoID DESC");
 
-                objContactInfoData = objConnect.Query<ContactInfoData>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
+                    objContactInfoData = objConnect.Query<ContactInfoData>(sbSQL.ToString(), new { ContactInfoID = ContactInfoID }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return objContactInfoData;

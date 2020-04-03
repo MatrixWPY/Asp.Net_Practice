@@ -1,75 +1,56 @@
 ﻿@model IEnumerable<WebMVC.Models.Data.ContactInfoData>
 
+@section Style
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet">
+}
+
 <p>
     @Html.ActionLink("Create", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nickname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.IsEnable)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.UpdateTime)
-        </th>*@
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nickname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.IsEnable)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CreateTime)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.UpdateTime)
-        </td>*@
-        <td>
-            @Html.ActionLink("Details", "Details", new { lContactInfoID = item.ContactInfoID }) |
-            @Html.ActionLink("Edit", "Edit", new { lContactInfoID = item.ContactInfoID }) |
-            @Html.ActionLink("Delete", "Delete", new { lContactInfoID = item.ContactInfoID })
-        </td>
-    </tr>
-}
-
+<table id="area" class="table" data-order="[[0,&quot;desc&quot;]]" width="100%">
+    <thead>
+        <tr>
+            <th data-data="ContactInfoID" data-visible="false">ContactInfoID</th>
+            <th data-data="Name">Name</th>
+            <th data-data="Nickname" data-orderable="false">Nickname</th>
+            <th data-data="Gender" data-orderable="false">Gender</th>
+            <th data-data="Age" data-orderable="false">Age</th>
+            <th data-data="PhoneNo" data-orderable="false">PhoneNo</th>
+            <th data-data="Address" data-orderable="false">Address</th>
+            <th data-orderable="false"></th>
+        </tr>
+    </thead>
 </table>
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#area").DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    type: "POST",
+                    url: "@Url.Action("Index", "ContactInfo")"
+                },
+                columnDefs: [{
+                    targets: -1,//-1表示最后一行
+                    render: function (data, type, full, meta) {
+                        var key = full.ContactInfoID;
+                        var DetailsUrl = '@Url.Action("Details", "ContactInfo")?lContactInfoID=' + key;
+                        var EditUrl = '@Url.Action("Edit", "ContactInfo")?lContactInfoID=' + key;
+                        var DeleteUrl = '@Url.Action("Delete", "ContactInfo")?lContactInfoID=' + key;
+                        return '<a class="btn btn-sm btn-info" href="' + DetailsUrl+'">Details<i class="fa fa-cogs"></i></a>' +
+                            '<a class="btn btn-sm btn-info" href="' + EditUrl+'">Edit<i class="fa fa-cogs"></i></a>' +
+                            '<a class="btn btn-sm btn-info" href="' + DeleteUrl+'">Delete<i class="fa fa-trash"></i></a>';
+                    }
+                }]
+            });
+        });
+    </script>
+}

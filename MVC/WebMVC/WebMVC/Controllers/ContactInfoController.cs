@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Filters;
 using WebMVC.Models.Data;
 using WebMVC.Models.Repository;
+using WebMVC.Models.ViewModel;
 
 namespace WebMVC.Controllers
 {
@@ -13,9 +13,19 @@ namespace WebMVC.Controllers
     {
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
+        {
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            List<ContactInfoData> liContactInfoData = objContactInfoRepository.GetContactInfo();
-            return View(liContactInfoData);
+            ContactInfoResVM objContactInfoResVM = objContactInfoRepository.GetContactInfo(objContactInfoReqVM);
+
+            int iTotalCount = (objContactInfoResVM.liContactInfoData.Any() ? objContactInfoResVM.liContactInfoData.Select(e => e.TotalCount).FirstOrDefault() : 0);
+            var result = new DataTablesResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, objContactInfoResVM.liContactInfoData);
+
+            return Content(JsonConvert.SerializeObject(result), "application/json");
         }
 
         public ActionResult Details(long lContactInfoID)
