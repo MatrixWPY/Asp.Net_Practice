@@ -22,10 +22,19 @@ namespace WebMVC.Controllers
         public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
         {
             DataTableQueryData objDataTableQueryData = new DataTableQueryData();
-            objDataTableQueryData.DataTableCondition.PageStartRow = objContactInfoReqVM.Start;
-            objDataTableQueryData.DataTableCondition.PageRowCnt = objContactInfoReqVM.Length;
-            objDataTableQueryData.DataTableCondition.OrderColumn = objContactInfoReqVM.OrderBy;
-            objDataTableQueryData.DataTableCondition.OrderDir = objContactInfoReqVM.OrderDir.ToString();
+            objDataTableQueryData.DataTableParam.PageStartRow = objContactInfoReqVM.Start;
+            objDataTableQueryData.DataTableParam.PageRowCnt = objContactInfoReqVM.Length;
+            objDataTableQueryData.DataTableParam.OrderColumn = objContactInfoReqVM.OrderBy;
+            objDataTableQueryData.DataTableParam.OrderDir = objContactInfoReqVM.OrderDir.ToString();
+            objDataTableQueryData.QueryParam["IsEnable"] = "1";
+            if (!string.IsNullOrWhiteSpace(objContactInfoReqVM.Name))
+            {
+                objDataTableQueryData.QueryParam["Name"] = objContactInfoReqVM.Name.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(objContactInfoReqVM.Nickname))
+            {
+                objDataTableQueryData.QueryParam["Nickname"] = objContactInfoReqVM.Nickname.Trim();
+            }
 
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
             List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfoByCondition(objDataTableQueryData);

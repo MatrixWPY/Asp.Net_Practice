@@ -9,14 +9,23 @@
 <p>
     @Html.ActionLink("Create", "Create")
 </p>
-<table id="area" class="table" data-order="[[0,&quot;desc&quot;]]" width="100%">
+<div class="col-lg-3">
+    <input type="text" placeholder="Name" id="Name" class="form-control">
+</div>
+<div class="col-lg-3">
+    <input type="text" placeholder="Nickname" id="Nickname" class="form-control">
+</div>
+<div class="col-lg-2">
+    <button id="btnSearch" class="btn btn-warning pull-right" type="button"><i class="fa fa-search"></i>Search</button>
+</div>
+<table id="dtContactInfo" class="table" data-order="[[0,&quot;asc&quot;]]" width="100%">
     <thead>
         <tr>
             <th data-data="ContactInfoID" data-visible="false">ContactInfoID</th>
             <th data-data="Name">Name</th>
-            <th data-data="Nickname" data-orderable="false">Nickname</th>
-            <th data-data="Gender" data-orderable="false">Gender</th>
-            <th data-data="Age" data-orderable="false">Age</th>
+            <th data-data="Nickname">Nickname</th>
+            <th data-data="Gender">Gender</th>
+            <th data-data="Age">Age</th>
             <th data-data="PhoneNo" data-orderable="false">PhoneNo</th>
             <th data-data="Address" data-orderable="false">Address</th>
             <th data-orderable="false"></th>
@@ -31,28 +40,38 @@
     <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#area").DataTable({
+            var table = $("#dtContactInfo").DataTable({
                 serverSide: true,
                 processing: true,
+                searching: false,
+                lengthChange: false,
                 ajax: {
                     type: "POST",
                     url: "@Url.Action("Index", "ContactInfo")",
                     headers: {
                         "RequestVerificationToken": "@CommonRazorFunctions.GetAntiForgeryToken()"
+                    },
+                    data: function (data) {
+                        data.Name = $("#Name").val();
+                        data.Nickname = $("#Nickname").val();
                     }
                 },
                 columnDefs: [{
                     targets: -1,//-1表示最后一行
                     render: function (data, type, full, meta) {
-                        var key = full.ContactInfoID;
-                        var DetailsUrl = '@Url.Action("Details", "ContactInfo")?lContactInfoID=' + key;
-                        var EditUrl = '@Url.Action("Edit", "ContactInfo")?lContactInfoID=' + key;
-                        var DeleteUrl = '@Url.Action("Delete", "ContactInfo")?lContactInfoID=' + key;
+                        var PK = full.ContactInfoID;
+                        var DetailsUrl = '@Url.Action("Details", "ContactInfo")?lContactInfoID=' + PK;
+                        var EditUrl = '@Url.Action("Edit", "ContactInfo")?lContactInfoID=' + PK;
+                        var DeleteUrl = '@Url.Action("Delete", "ContactInfo")?lContactInfoID=' + PK;
                         return '<a class="btn btn-sm btn-info" href="' + DetailsUrl+'">Details<i class="fa fa-cogs"></i></a>' +
-                            '<a class="btn btn-sm btn-info" href="' + EditUrl+'">Edit<i class="fa fa-cogs"></i></a>' +
-                            '<a class="btn btn-sm btn-info" href="' + DeleteUrl+'">Delete<i class="fa fa-trash"></i></a>';
+                                '<a class="btn btn-sm btn-info" href="' + EditUrl+'">Edit<i class="fa fa-cogs"></i></a>' +
+                                '<a class="btn btn-sm btn-info" href="' + DeleteUrl+'">Delete<i class="fa fa-trash"></i></a>';
                     }
                 }]
+            });
+
+            $("#btnSearch").click(function () {
+                table.ajax.reload();
             });
         });
     </script>

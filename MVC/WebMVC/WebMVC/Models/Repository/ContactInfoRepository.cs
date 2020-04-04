@@ -25,19 +25,47 @@ namespace WebMVC.Models.Repository
                     StringBuilder sbSQL = new StringBuilder();
                     sbSQL.AppendLine("SELECT *, (SELECT COUNT(1) FROM Tbl_ContactInfo) AS TotalCount FROM Tbl_ContactInfo");
                     sbSQL.AppendLine("WHERE 1=1");
-                    sbSQL.AppendLine("AND IsEnable=1");
 
-                    string strSort = objDataTableQueryData.DataTableCondition.OrderColumn + " " + objDataTableQueryData.DataTableCondition.OrderDir;
+                    if (objDataTableQueryData.QueryParam.Any())
+                    {
+                        if (objDataTableQueryData.QueryParam.ContainsKey("IsEnable"))
+                        {
+                            sbSQL.AppendLine("AND IsEnable=@IsEnable");
+                        }
+                        if (objDataTableQueryData.QueryParam.ContainsKey("Name"))
+                        {
+                            sbSQL.AppendLine("AND Name LIKE @Name");
+                        }
+                        if (objDataTableQueryData.QueryParam.ContainsKey("Nickname"))
+                        {
+                            sbSQL.AppendLine("AND Nickname LIKE @Nickname");
+                        }
+                    }
+
+                    string strSort = objDataTableQueryData.DataTableParam.OrderColumn + " " + objDataTableQueryData.DataTableParam.OrderDir;
                     if (!string.IsNullOrWhiteSpace(strSort))
                     {
                         sbSQL.AppendLine("ORDER BY");
                         sbSQL.AppendLine("CASE WHEN @Sort = 'Name ASC' THEN Name END ASC,");
-                        sbSQL.AppendLine("CASE WHEN @Sort = 'Name DESC' THEN Name END DESC");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Name DESC' THEN Name END DESC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Nickname ASC' THEN Nickname END ASC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Nickname DESC' THEN Nickname END DESC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Gender ASC' THEN Gender END ASC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Gender DESC' THEN Gender END DESC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Age ASC' THEN Age END ASC,");
+                        sbSQL.AppendLine("CASE WHEN @Sort = 'Age DESC' THEN Age END DESC");
                     }
 
                     sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
 
-                    liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new { Sort = strSort, Start = objDataTableQueryData.DataTableCondition.PageStartRow, Length = objDataTableQueryData.DataTableCondition.PageRowCnt }).ToList();
+                    liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new {
+                        IsEnable = (objDataTableQueryData.QueryParam.ContainsKey("IsEnable") ? objDataTableQueryData.QueryParam["IsEnable"] : string.Empty),
+                        Name = (objDataTableQueryData.QueryParam.ContainsKey("Name") ? "%" + objDataTableQueryData.QueryParam["Name"] + "%" : string.Empty),
+                        Nickname = (objDataTableQueryData.QueryParam.ContainsKey("Nickname") ? "%" + objDataTableQueryData.QueryParam["Nickname"] + "%" : string.Empty),
+                        Sort = strSort,
+                        Start = objDataTableQueryData.DataTableParam.PageStartRow,
+                        Length = objDataTableQueryData.DataTableParam.PageRowCnt
+                    }).ToList();
                 }
             }
             catch (Exception ex)

@@ -4,9 +4,9 @@ namespace WebMVC.Models.Data
 {
     public class DataTableQueryData
     {
-        public DataTableBase DataTableCondition = new DataTableBase();
+        public DataTableBase DataTableParam = new DataTableBase();
 
-        public Dictionary<string, string> QueryCondition = new Dictionary<string, string>();
+        public Dictionary<string, string> QueryParam = new Dictionary<string, string>();
 
         public class DataTableBase
         {
