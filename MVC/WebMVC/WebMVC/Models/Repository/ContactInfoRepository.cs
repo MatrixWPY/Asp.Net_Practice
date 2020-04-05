@@ -14,7 +14,7 @@ namespace WebMVC.Models.Repository
         {
         }
 
-        public List<ContactInfoExData> GetContactInfoByCondition(DataTableQueryData objDataTableQueryData)
+        public List<ContactInfoExData> GetContactInfoByCondition(QueryBaseData objQueryBaseData)
         {
             List<ContactInfoExData> liContactInfoExData = null;
 
@@ -26,23 +26,23 @@ namespace WebMVC.Models.Repository
                     sbSQL.AppendLine("SELECT *, (SELECT COUNT(1) FROM Tbl_ContactInfo) AS TotalCount FROM Tbl_ContactInfo");
                     sbSQL.AppendLine("WHERE 1=1");
 
-                    if (objDataTableQueryData.QueryParam.Any())
+                    if (objQueryBaseData.QueryParam.Any())
                     {
-                        if (objDataTableQueryData.QueryParam.ContainsKey("IsEnable"))
+                        if (objQueryBaseData.QueryParam.ContainsKey("IsEnable"))
                         {
                             sbSQL.AppendLine("AND IsEnable=@IsEnable");
                         }
-                        if (objDataTableQueryData.QueryParam.ContainsKey("Name"))
+                        if (objQueryBaseData.QueryParam.ContainsKey("Name"))
                         {
                             sbSQL.AppendLine("AND Name LIKE @Name");
                         }
-                        if (objDataTableQueryData.QueryParam.ContainsKey("Nickname"))
+                        if (objQueryBaseData.QueryParam.ContainsKey("Nickname"))
                         {
                             sbSQL.AppendLine("AND Nickname LIKE @Nickname");
                         }
                     }
 
-                    string strSort = objDataTableQueryData.DataTableParam.OrderColumn + " " + objDataTableQueryData.DataTableParam.OrderDir;
+                    string strSort = objQueryBaseData.DataTableParam.OrderColumn + " " + objQueryBaseData.DataTableParam.OrderDir;
                     if (!string.IsNullOrWhiteSpace(strSort))
                     {
                         sbSQL.AppendLine("ORDER BY");
@@ -55,16 +55,23 @@ namespace WebMVC.Models.Repository
                         sbSQL.AppendLine("CASE WHEN @Sort = 'Age ASC' THEN Age END ASC,");
                         sbSQL.AppendLine("CASE WHEN @Sort = 'Age DESC' THEN Age END DESC");
                     }
+                    else
+                    {
+                        sbSQL.AppendLine("ORDER BY ContactInfoID ASC");
+                    }
 
-                    sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
+                    if (null != objQueryBaseData.DataTableParam.PageStartRow && null != objQueryBaseData.DataTableParam.PageRowCnt)
+                    {
+                        sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
+                    }
 
                     liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new {
-                        IsEnable = (objDataTableQueryData.QueryParam.ContainsKey("IsEnable") ? objDataTableQueryData.QueryParam["IsEnable"] : string.Empty),
-                        Name = (objDataTableQueryData.QueryParam.ContainsKey("Name") ? "%" + objDataTableQueryData.QueryParam["Name"] + "%" : string.Empty),
-                        Nickname = (objDataTableQueryData.QueryParam.ContainsKey("Nickname") ? "%" + objDataTableQueryData.QueryParam["Nickname"] + "%" : string.Empty),
-                        Sort = strSort,
-                        Start = objDataTableQueryData.DataTableParam.PageStartRow,
-                        Length = objDataTableQueryData.DataTableParam.PageRowCnt
+                        IsEnable = (objQueryBaseData.QueryParam.ContainsKey("IsEnable") ? objQueryBaseData.QueryParam["IsEnable"] : 0),
+                        Name = (objQueryBaseData.QueryParam.ContainsKey("Name") ? "%" + objQueryBaseData.QueryParam["Name"] + "%" : string.Empty),
+                        Nickname = (objQueryBaseData.QueryParam.ContainsKey("Nickname") ? "%" + objQueryBaseData.QueryParam["Nickname"] + "%" : string.Empty),
+                        Sort = strSort ?? string.Empty,
+                        Start = objQueryBaseData.DataTableParam.PageStartRow ?? 0,
+                        Length = objQueryBaseData.DataTableParam.PageRowCnt ?? 0
                     }).ToList();
                 }
             }

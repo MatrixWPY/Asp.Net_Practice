@@ -1,6 +1,6 @@
-﻿namespace WebMVC.Models.ViewModel
+﻿namespace WebMVC.Models.ViewModel.ContactInfo
 {
-    public class ContactInfoReqVM : DataTableReqVM
+    public class IndexVM : DataTableReqVM
     {
         public string Name { get; set; }
 

@@ -7,6 +7,7 @@ using WebMVC.Filters;
 using WebMVC.Models.Data;
 using WebMVC.Models.Repository;
 using WebMVC.Models.ViewModel;
+using WebMVC.Models.ViewModel.ContactInfo;
 
 namespace WebMVC.Controllers
 {
@@ -19,30 +20,29 @@ namespace WebMVC.Controllers
 
         [HttpPost]
         [AjaxValidateAntiForgeryToken]
-        public ActionResult Index(ContactInfoReqVM objContactInfoReqVM)
+        public ActionResult Index(IndexVM objIndexVM)
         {
-            DataTableQueryData objDataTableQueryData = new DataTableQueryData();
-            objDataTableQueryData.DataTableParam.PageStartRow = objContactInfoReqVM.Start;
-            objDataTableQueryData.DataTableParam.PageRowCnt = objContactInfoReqVM.Length;
-            objDataTableQueryData.DataTableParam.OrderColumn = objContactInfoReqVM.OrderBy;
-            objDataTableQueryData.DataTableParam.OrderDir = objContactInfoReqVM.OrderDir.ToString();
-            objDataTableQueryData.QueryParam["IsEnable"] = "1";
-            if (!string.IsNullOrWhiteSpace(objContactInfoReqVM.Name))
+            QueryBaseData objQueryBaseData = new QueryBaseData();
+            objQueryBaseData.QueryParam["IsEnable"] = 1;
+            if (!string.IsNullOrWhiteSpace(objIndexVM.Name))
             {
-                objDataTableQueryData.QueryParam["Name"] = objContactInfoReqVM.Name.Trim();
+                objQueryBaseData.QueryParam["Name"] = objIndexVM.Name.Trim();
             }
-            if (!string.IsNullOrWhiteSpace(objContactInfoReqVM.Nickname))
+            if (!string.IsNullOrWhiteSpace(objIndexVM.Nickname))
             {
-                objDataTableQueryData.QueryParam["Nickname"] = objContactInfoReqVM.Nickname.Trim();
+                objQueryBaseData.QueryParam["Nickname"] = objIndexVM.Nickname.Trim();
             }
+            objQueryBaseData.DataTableParam.PageStartRow = objIndexVM.Start;
+            objQueryBaseData.DataTableParam.PageRowCnt = objIndexVM.Length;
+            objQueryBaseData.DataTableParam.OrderColumn = objIndexVM.OrderBy;
+            objQueryBaseData.DataTableParam.OrderDir = objIndexVM.OrderDir.ToString();
 
             ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
-            List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfoByCondition(objDataTableQueryData);
+            List<ContactInfoExData> liContactInfoExData = objContactInfoRepository.GetContactInfoByCondition(objQueryBaseData);
 
             int iTotalCount = (liContactInfoExData.Any() ? liContactInfoExData.Select(e => e.TotalCount).FirstOrDefault() : 0);
-            var result = new DataTableResVM<ContactInfoData>(objContactInfoReqVM.Draw, iTotalCount, iTotalCount, liContactInfoExData);
-
-            return Content(JsonConvert.SerializeObject(result), "application/json");
+            DataTableResVM<ContactInfoData> objDataTableResVM = new DataTableResVM<ContactInfoData>(objIndexVM.Draw, iTotalCount, iTotalCount, liContactInfoExData);
+            return Content(JsonConvert.SerializeObject(objDataTableResVM), "application/json");
         }
 
         public ActionResult Details(long lContactInfoID)

@@ -55,10 +55,10 @@ namespace WebMVC.Models.Data
         public enum EnumGender
         {
             [EnumMember]
-            Male = 0,
+            Female = 0,
 
             [EnumMember]
-            Female = 1
+            Male = 1
         }
     }
 }
