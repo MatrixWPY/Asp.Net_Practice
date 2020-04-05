@@ -139,9 +139,9 @@
     <Compile Include="Models\Data\QueryBaseData.cs" />
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
     <Compile Include="Models\Repository\DapperBaseRepository.cs" />
-    <Compile Include="Models\ViewModel\ContactInfo\IndexVM.cs" />
-    <Compile Include="Models\ViewModel\DataTableReqVM.cs" />
-    <Compile Include="Models\ViewModel\DataTableResVM.cs" />
+    <Compile Include="ViewModel\ContactInfo\IndexVM.cs" />
+    <Compile Include="ViewModel\DataTableReqVM.cs" />
+    <Compile Include="ViewModel\DataTableResVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

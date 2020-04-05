@@ -1,4 +1,4 @@
-﻿namespace WebMVC.Models.ViewModel.ContactInfo
+﻿namespace WebMVC.ViewModel.ContactInfo
 {
     public class IndexVM : DataTableReqVM
     {

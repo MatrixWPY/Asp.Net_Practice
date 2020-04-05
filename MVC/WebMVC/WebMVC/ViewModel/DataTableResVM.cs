@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebMVC.Models.ViewModel
+namespace WebMVC.ViewModel
 {
     /// <summary>
     ///     DataTable的返回信息

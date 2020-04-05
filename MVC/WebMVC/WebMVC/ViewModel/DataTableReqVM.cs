@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace WebMVC.Models.ViewModel
+namespace WebMVC.ViewModel
 {
     /// <summary>
     ///     DataTables参数

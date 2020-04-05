@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using WebMVC.Filters;
 using WebMVC.Models.Data;
 using WebMVC.Models.Repository;
-using WebMVC.Models.ViewModel;
-using WebMVC.Models.ViewModel.ContactInfo;
+using WebMVC.ViewModel;
+using WebMVC.ViewModel.ContactInfo;
 
 namespace WebMVC.Controllers
 {
