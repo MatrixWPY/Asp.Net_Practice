@@ -26,6 +26,7 @@ namespace WebMVC.Models.Repository
                     sbSQL.AppendLine("SELECT *, (SELECT COUNT(1) FROM Tbl_ContactInfo) AS TotalCount FROM Tbl_ContactInfo");
                     sbSQL.AppendLine("WHERE 1=1");
 
+                    #region [Query Condition]
                     if (objQueryBaseData.QueryParam.Any())
                     {
                         if (objQueryBaseData.QueryParam.ContainsKey("IsEnable"))
@@ -41,7 +42,9 @@ namespace WebMVC.Models.Repository
                             sbSQL.AppendLine("AND Nickname LIKE @Nickname");
                         }
                     }
+                    #endregion
 
+                    #region [Order]
                     string strSort = objQueryBaseData.DataTableParam.OrderColumn + " " + objQueryBaseData.DataTableParam.OrderDir;
                     if (!string.IsNullOrWhiteSpace(strSort))
                     {
@@ -59,11 +62,14 @@ namespace WebMVC.Models.Repository
                     {
                         sbSQL.AppendLine("ORDER BY ContactInfoID ASC");
                     }
+                    #endregion
 
+                    #region[Paging]
                     if (null != objQueryBaseData.DataTableParam.PageStartRow && null != objQueryBaseData.DataTableParam.PageRowCnt)
                     {
                         sbSQL.AppendLine("OFFSET @Start ROWS FETCH NEXT @Length ROWS ONLY");
                     }
+                    #endregion
 
                     liContactInfoExData = objConnect.Query<ContactInfoExData>(sbSQL.ToString(), new {
                         IsEnable = (objQueryBaseData.QueryParam.ContainsKey("IsEnable") ? objQueryBaseData.QueryParam["IsEnable"] : 0),

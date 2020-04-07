@@ -54,6 +54,17 @@
                     data: function (data) {
                         data.Name = $("#txtName").val();
                         data.Nickname = $("#txtNickname").val();
+                    },
+                    dataSrc: function (result) {
+                        if (null != result.error)
+                        {
+                            alert("Fail!");
+                            console.log(result.error);
+                        }
+                        else
+                        {
+                            return result.data;
+                        }
                     }
                 },
                 columnDefs: [
