@@ -422,6 +422,7 @@
     <Content Include="Views\ContactInfo\Details.cshtml" />
     <Content Include="Views\ContactInfo\Edit.cshtml" />
     <Content Include="Views\ContactInfo\Delete.cshtml" />
+    <Content Include="Views\ContactInfo\CreateUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

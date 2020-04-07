@@ -231,5 +231,35 @@ namespace WebMVC.Controllers
                 return Content(JsonConvert.SerializeObject(returnData), "application/json");
             }
         }
+
+        public ActionResult CreateUpdate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUpdate(ContactInfoData objContactInfoData)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+                    objContactInfoRepository.AddUpdateContactInfo(objContactInfoData);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("InsertUpdateError", "新增+更新失敗!");
+                    return View(objContactInfoData);
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("InsertUpdateError", "新增+更新失敗!");
+                return View(objContactInfoData);
+            }
+        }
     }
 }

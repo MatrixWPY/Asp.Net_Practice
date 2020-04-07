@@ -210,5 +210,40 @@ namespace WebMVC.Models.Repository
 
             return bolResult;
         }
+
+        public bool AddUpdateContactInfo(ContactInfoData objContactInfoData)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                using (var objConnect = GetDBConnection())
+                {
+                    using (var objTran = objConnect.BeginTransaction())
+                    {
+                        try
+                        {
+                            AddContactInfo(objContactInfoData, objTran);
+                            objContactInfoData.Nickname = (string.IsNullOrWhiteSpace(objContactInfoData.Nickname) ? objContactInfoData.Name : objContactInfoData.Nickname);
+                            UpdateContactInfo(objContactInfoData, objTran);
+
+                            objTran.Commit();
+                            bolResult = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            objTran.Rollback();
+                            throw ex;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return bolResult;
+        }
     }
 }
