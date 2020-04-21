@@ -1,0 +1,89 @@
+<html>
+<body>
+
+<hr />
+  ContactInfo API
+  <br>
+  測試主機位置 : 
+  <input type="radio" name="Host" value="localhost" checked> localhost <br>
+  交易方式 : 
+  <input type="radio" name="ContactInfoType" value="Query" checked> Query
+<hr />
+
+<div id="divQuery">
+<h3>Query</h3>
+<form method="post"> 
+  ContactInfoID : <input type="text" id="ContactInfoID" name="ContactInfoID" value="" /><br/>
+  <br>
+  <input type="submit" name="name" value="Query(查詢)" />
+</form>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.3.2/sha256.min.js"></script>
+<script type="text/javascript">
+
+// Shorthand for $( document ).ready()
+$(function() {
+
+	var urlLocal="https://localhost:44375/API/";
+	
+	//Set form action URL
+	$('form').submit(function(){
+		
+		var strHost = $('input[name="Host"]:checked').val();
+		var strContactInfoType = $('input[name="ContactInfoType"]:checked').val();
+		
+		var url = "";
+		switch (strHost)
+		{
+			case "localhost":
+				{
+					url = urlLocal + "ContactInfo/" + strContactInfoType;
+				}
+				break;
+		}
+		//alert(url);
+ 		
+		$('form').attr('action', url);
+	});
+
+	//Set div show or hide
+    $('input[type=radio][name=ContactInfoType]').change(function() {
+	
+		$("#divQuery").hide();
+		
+		if (this.value == 'Query') {
+            $("#divQuery").show();
+        }
+    });
+
+});
+
+function SignCalc(Type) {
+	var signStr = "";
+	
+	switch(Type)
+	{
+		case "Query":
+			signStr = $("#SignKey3").val() + "&ShopID=" + $("#ShopID3").val() + "&ShopOrderNo=" + $("#ShopOrderNo3").val() + "&DeviceID=" + $("#DeviceID3").val() + "&" + $("#SignKey3").val();
+			break;
+	}
+	//alert(signStr);
+		
+	var res = sha256(signStr).toUpperCase();
+	//alert(res);
+	
+	switch(Type)
+	{
+		case "Query":
+			$("#Sign3").val(res);
+			break;
+	}	
+}
+
+</script>
+
+</html>
