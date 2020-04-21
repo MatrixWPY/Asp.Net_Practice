@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using WebMVC.Models.Data;
+using WebAPI.Models.Data;
 
-namespace WebMVC.Models.Repository
+namespace WebAPI.Models.Repository
 {
     public class ContactInfoRepository : DapperBaseRepository
     {

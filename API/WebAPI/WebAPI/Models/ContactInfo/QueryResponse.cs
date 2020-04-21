@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebMVC.Models.Data;
+using WebAPI.Models.Data;
 
 namespace WebAPI.Models.ContactInfo
 {

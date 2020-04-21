@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace WebMVC.Models.Data
+namespace WebAPI.Models.Data
 {
     [Table("Tbl_ContactInfo")]
     public class ContactInfoData

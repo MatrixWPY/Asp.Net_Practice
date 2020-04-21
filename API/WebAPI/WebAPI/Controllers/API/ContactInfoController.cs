@@ -3,8 +3,8 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using WebAPI.Models.ContactInfo;
-using WebMVC.Models.Data;
-using WebMVC.Models.Repository;
+using WebAPI.Models.Data;
+using WebAPI.Models.Repository;
 
 namespace WebAPI.Controllers.API
 {
