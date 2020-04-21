@@ -6,7 +6,7 @@ using WebAPI.Models.ContactInfo;
 using WebMVC.Models.Data;
 using WebMVC.Models.Repository;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Controllers.API
 {
     public class ContactInfoController : ApiController
     {
