@@ -14,8 +14,10 @@
 <h3>Query</h3>
 <form method="post"> 
   ContactInfoID : <input type="text" id="ContactInfoID" name="ContactInfoID" value="" /><br/>
+  Sign-Key : <input type="text" id="SignKey1" name="SignKey" value="7F85C629D6D14D37A7635A50CC89DA12" /><br/>
+  <input type="hidden" id="Sign1" name="Sign"/>
   <br>
-  <input type="submit" name="name" value="Query(¬d¸ß)" />
+  <input type="submit" name="name" value="Query(¬d¸ß)" onclick="SignCalc('Query');" />
 </form>
 </div>
 
@@ -68,7 +70,7 @@ function SignCalc(Type) {
 	switch(Type)
 	{
 		case "Query":
-			signStr = $("#SignKey3").val() + "&ShopID=" + $("#ShopID3").val() + "&ShopOrderNo=" + $("#ShopOrderNo3").val() + "&DeviceID=" + $("#DeviceID3").val() + "&" + $("#SignKey3").val();
+			signStr = $("#SignKey1").val() + "&ContactInfoID=" + $("#ContactInfoID").val() + "&" + $("#SignKey1").val();
 			break;
 	}
 	//alert(signStr);
@@ -79,7 +81,7 @@ function SignCalc(Type) {
 	switch(Type)
 	{
 		case "Query":
-			$("#Sign3").val(res);
+			$("#Sign1").val(res);
 			break;
 	}	
 }

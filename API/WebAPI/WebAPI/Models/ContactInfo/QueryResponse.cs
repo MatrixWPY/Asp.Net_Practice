@@ -9,5 +9,8 @@ namespace WebAPI.Models.ContactInfo
         public string Result { get; set; }
 
         public ContactInfoData Data { get; set; }
+
+        [Required]
+        public string Sign { get; set; }
     }
 }

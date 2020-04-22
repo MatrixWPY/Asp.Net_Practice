@@ -168,6 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\ContactInfoLogic.cs" />
     <Compile Include="Models\ContactInfo\QueryRequest.cs" />
     <Compile Include="Models\ContactInfo\QueryResponse.cs" />
     <Compile Include="Models\Data\ContactInfoData.cs" />
