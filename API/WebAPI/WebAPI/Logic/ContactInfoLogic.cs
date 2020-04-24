@@ -55,6 +55,55 @@ namespace WebAPI.Logic
             }
         }
 
+        public AddResponse Add(AddRequest objAddRequest)
+        {
+            AddResponse objAddResponse = new AddResponse();
+            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+
+            try
+            {
+                #region [Validation]
+                bool bolCheckSign = Utility.CheckSHA(objAddRequest.Sign.Trim(), GetSign(objAddRequest, ApiSignKey));
+                if (!bolCheckSign)
+                {
+                    objAddResponse.Result = $"{MsgFail} : Sign Validate Error";
+                    return objAddResponse;
+                }
+                #endregion
+
+                #region [Logic]
+                ContactInfoData objContactInfoData = new ContactInfoData();
+                objContactInfoData.Name = objAddRequest.Name.Trim();
+                objContactInfoData.Nickname = (!string.IsNullOrWhiteSpace(objAddRequest.Nickname) ? objAddRequest.Nickname.Trim() : null);
+                objContactInfoData.Gender = (ContactInfoData.EnumGender?)objAddRequest.Gender;
+                objContactInfoData.Age = objAddRequest.Age;
+                objContactInfoData.PhoneNo = objAddRequest.PhoneNo.Trim();
+                objContactInfoData.Address = objAddRequest.Address.Trim();
+
+                bool bolAddResult = objContactInfoRepository.AddContactInfo(objContactInfoData);
+                if (bolAddResult)
+                {
+                    objAddResponse.Result = MsgSuccess;
+                    objAddResponse.Data = objContactInfoData;
+                    objAddResponse.Sign = GetSign(objAddResponse, ApiSignKey);
+                }
+                else
+                {
+                    objAddResponse.Result = $"{MsgFail} : Add Data Error";
+                }
+
+                return objAddResponse;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                #region [Exception]
+                objAddResponse.Result = $"{MsgException} : {ex.Message}";
+                return objAddResponse;
+                #endregion
+            }
+        }
+
         private static string GetSign(object objData, string strKey)
         {
             string strParams = string.Empty;
@@ -70,6 +119,20 @@ namespace WebAPI.Logic
             if (objData is QueryResponse)
             {
                 strParams = $"{strKey}&Result={((QueryResponse)objData).Result}&ContactInfoID={((QueryResponse)objData).Data.ContactInfoID}&{strKey}";
+            }
+            #endregion
+
+            #region [AddRequest]
+            if (objData is AddRequest)
+            {
+                strParams = $"{strKey}&Name={((AddRequest)objData).Name}&PhoneNo={((AddRequest)objData).PhoneNo}&{strKey}";
+            }
+            #endregion
+
+            #region [AddResponse]
+            if (objData is AddResponse)
+            {
+                strParams = $"{strKey}&Result={((AddResponse)objData).Result}&ContactInfoID={((AddResponse)objData).Data.ContactInfoID}&{strKey}";
             }
             #endregion
 

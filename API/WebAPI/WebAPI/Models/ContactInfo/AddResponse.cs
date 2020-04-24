@@ -2,7 +2,7 @@
 
 namespace WebAPI.Models.ContactInfo
 {
-    public class QueryResponse
+    public class AddResponse
     {
         public string Result { get; set; }
 

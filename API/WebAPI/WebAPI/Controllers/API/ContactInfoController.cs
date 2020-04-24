@@ -29,13 +29,42 @@ namespace WebAPI.Controllers.API
                 string strErrorMsg = string.Empty;
                 foreach (var item in ModelState.Values)
                 {
-                    strErrorMsg += (item.Errors.Count > 0 ? string.Join(",", item.Errors.Select(e => e.ErrorMessage)) : string.Empty);
+                    strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
                 }
                 objQueryResponse = new QueryResponse() { Result = strErrorMsg };
             }
 
             //轉換JSON格式回傳
             HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(Utility.GetJSON(objQueryResponse), Encoding.GetEncoding("UTF-8"), "application/json") };
+            return ResponseMessage(result);
+        }
+
+        [HttpPost]
+        public IHttpActionResult Add([FromBody] AddRequest objAddRequest)
+        {
+            AddResponse objAddResponse;
+
+            if (ModelState.IsValid)
+            {
+                ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
+                objAddResponse = objContactInfoLogic.Add(objAddRequest);
+
+                //return Ok(objAddResponse);
+            }
+            else
+            {
+                //return BadRequest(ModelState);
+
+                string strErrorMsg = string.Empty;
+                foreach (var item in ModelState.Values)
+                {
+                    strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
+                }
+                objAddResponse = new AddResponse() { Result = strErrorMsg };
+            }
+
+            //轉換JSON格式回傳
+            HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(Utility.GetJSON(objAddResponse), Encoding.GetEncoding("UTF-8"), "application/json") };
             return ResponseMessage(result);
         }
     }
