@@ -104,6 +104,62 @@ namespace WebAPI.Logic
             }
         }
 
+        public UpdateResponse Update(UpdateRequest objUpdateRequest)
+        {
+            UpdateResponse objUpdateResponse = new UpdateResponse();
+            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+
+            try
+            {
+                #region [Validation]
+                bool bolCheckSign = Utility.CheckSHA(objUpdateRequest.Sign.Trim(), GetSign(objUpdateRequest, ApiSignKey));
+                if (!bolCheckSign)
+                {
+                    objUpdateResponse.Result = $"{MsgFail} : Sign Validate Error";
+                    return objUpdateResponse;
+                }
+                #endregion
+
+                #region [Logic]
+                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(Convert.ToInt64(objUpdateRequest.ContactInfoID));
+                if (null == objContactInfoData)
+                {
+                    objUpdateResponse.Result = $"{MsgFail} : No Data";
+                }
+                else
+                {
+                    objContactInfoData.Name = objUpdateRequest.Name.Trim();
+                    objContactInfoData.Nickname = (!string.IsNullOrWhiteSpace(objUpdateRequest.Nickname) ? objUpdateRequest.Nickname.Trim() : null);
+                    objContactInfoData.Gender = (ContactInfoData.EnumGender?)objUpdateRequest.Gender;
+                    objContactInfoData.Age = objUpdateRequest.Age;
+                    objContactInfoData.PhoneNo = objUpdateRequest.PhoneNo.Trim();
+                    objContactInfoData.Address = objUpdateRequest.Address.Trim();
+
+                    bool bolUpdateResult = objContactInfoRepository.UpdateContactInfo(objContactInfoData);
+                    if (bolUpdateResult)
+                    {
+                        objUpdateResponse.Result = MsgSuccess;
+                        objUpdateResponse.Data = objContactInfoData;
+                        objUpdateResponse.Sign = GetSign(objUpdateResponse, ApiSignKey);
+                    }
+                    else
+                    {
+                        objUpdateResponse.Result = $"{MsgFail} : Update Data Error";
+                    }
+                }
+
+                return objUpdateResponse;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                #region [Exception]
+                objUpdateResponse.Result = $"{MsgException} : {ex.Message}";
+                return objUpdateResponse;
+                #endregion
+            }
+        }
+
         private static string GetSign(object objData, string strKey)
         {
             string strParams = string.Empty;
@@ -133,6 +189,20 @@ namespace WebAPI.Logic
             if (objData is AddResponse)
             {
                 strParams = $"{strKey}&Result={((AddResponse)objData).Result}&ContactInfoID={((AddResponse)objData).Data.ContactInfoID}&{strKey}";
+            }
+            #endregion
+
+            #region [UpdateRequest]
+            if (objData is UpdateRequest)
+            {
+                strParams = $"{strKey}&ContactInfoID={((UpdateRequest)objData).ContactInfoID}&{strKey}";
+            }
+            #endregion
+
+            #region [UpdateResponse]
+            if (objData is UpdateResponse)
+            {
+                strParams = $"{strKey}&Result={((UpdateResponse)objData).Result}&ContactInfoID={((UpdateResponse)objData).Data.ContactInfoID}&{strKey}";
             }
             #endregion
 

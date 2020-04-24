@@ -2,8 +2,11 @@
 
 namespace WebAPI.Models.ContactInfo
 {
-    public class AddRequest
+    public class UpdateRequest
     {
+        [Required(ErrorMessage = "{0} 為必填欄位。")]
+        public long? ContactInfoID { get; set; }
+
         [Required(ErrorMessage = "{0} 為必填欄位。")]
         [MaxLength(10, ErrorMessage = "{0} 限定最大長度為10。")]
         public string Name { get; set; }

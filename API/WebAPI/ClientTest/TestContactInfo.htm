@@ -10,6 +10,7 @@
   交易方式 : 
   <input type="radio" name="ContactInfoType" value="Query" checked> Query
   <input type="radio" name="ContactInfoType" value="Add"> Add
+  <input type="radio" name="ContactInfoType" value="Update"> Update
 <hr />
 
 <div id="divQuery">
@@ -39,6 +40,26 @@
   <input type="hidden" id="Sign2" name="Sign"/>
   <br>
   <input type="submit" name="name" value="Add(新增)" onclick="SignCalc('Add');" />
+</form>
+</div>
+
+<div id="divUpdate" style="display:none;">
+<h3>Update</h3>
+<form method="post"> 
+  ContactInfoID : <input type="text" id="ContactInfoID3" name="ContactInfoID" value="" /><br/>
+  Name : <input type="text" name="Name" value="" /><br/>
+  Nickname : <input type="text" name="Nickname" value="" /><br/>
+  Gender : <input type="radio" name="RdoGender3" value="1"> Male
+		<input type="radio" name="RdoGender3" value="0"> Female
+		<input type="hidden" id="Gender3" name="Gender"/>
+		<br/>
+  Age : <input type="text" name="Age" value="" /><br/>
+  PhoneNo : <input type="text" name="PhoneNo" value="" /><br/>
+  Address : <input type="text" name="Address" value="" /><br/>
+  Sign-Key : <input type="text" id="SignKey3" name="SignKey" value="7F85C629D6D14D37A7635A50CC89DA12" /><br/>
+  <input type="hidden" id="Sign3" name="Sign"/>
+  <br>
+  <input type="submit" name="name" value="Update(修改)" onclick="SignCalc('Update');" />
 </form>
 </div>
 
@@ -78,6 +99,7 @@ $(function() {
 	
 		$("#divQuery").hide();
 		$("#divAdd").hide();
+		$("#divUpdate").hide();
 		
 		switch (this.value)
 		{
@@ -88,13 +110,21 @@ $(function() {
 			case "Add":
 				$("#divAdd").show();
 				break;
+				
+			case "Update":
+				$("#divUpdate").show();
+				break;
 		}
     });
 	
-	//Set Add Gender
+	//Set Add/Update Gender
 	$('input[type=radio][name=RdoGender2]').change(function() {
 		var strGender2 = $('input[name="RdoGender2"]:checked').val();
 		$("#Gender2").val(strGender2);
+	});
+	$('input[type=radio][name=RdoGender3]').change(function() {
+		var strGender3 = $('input[name="RdoGender3"]:checked').val();
+		$("#Gender3").val(strGender3);
 	});
 
 });
@@ -111,6 +141,10 @@ function SignCalc(Type) {
 		case "Add":
 			signStr = $("#SignKey2").val() + "&Name=" + $("#Name2").val() + "&PhoneNo=" + $("#PhoneNo2").val() + "&" + $("#SignKey2").val();
 			break;
+			
+		case "Update":
+			signStr = $("#SignKey3").val() + "&ContactInfoID=" + $("#ContactInfoID3").val() + "&" + $("#SignKey3").val();
+			break;
 	}
 	//alert(signStr);
 		
@@ -125,6 +159,10 @@ function SignCalc(Type) {
 			
 		case "Add":
 			$("#Sign2").val(res);
+			break;
+			
+		case "Update":
+			$("#Sign3").val(res);
 			break;
 	}	
 }
