@@ -11,6 +11,7 @@
   <input type="radio" name="ContactInfoType" value="Query" checked> Query
   <input type="radio" name="ContactInfoType" value="Add"> Add
   <input type="radio" name="ContactInfoType" value="Update"> Update
+  <input type="radio" name="ContactInfoType" value="Delete"> Delete
 <hr />
 
 <div id="divQuery">
@@ -63,6 +64,17 @@
 </form>
 </div>
 
+<div id="divDelete" style="display:none;">
+<h3>Delete</h3>
+<form method="post"> 
+  ContactInfoID : <input type="text" id="ContactInfoID4" name="ContactInfoID" value="" /><br/>
+  Sign-Key : <input type="text" id="SignKey4" name="SignKey" value="7F85C629D6D14D37A7635A50CC89DA12" /><br/>
+  <input type="hidden" id="Sign4" name="Sign"/>
+  <br>
+  <input type="submit" name="name" value="Delete(§R°£)" onclick="SignCalc('Delete');" />
+</form>
+</div>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -100,6 +112,7 @@ $(function() {
 		$("#divQuery").hide();
 		$("#divAdd").hide();
 		$("#divUpdate").hide();
+		$("#divDelete").hide();
 		
 		switch (this.value)
 		{
@@ -113,6 +126,10 @@ $(function() {
 				
 			case "Update":
 				$("#divUpdate").show();
+				break;
+				
+			case "Delete":
+				$("#divDelete").show();
 				break;
 		}
     });
@@ -145,6 +162,10 @@ function SignCalc(Type) {
 		case "Update":
 			signStr = $("#SignKey3").val() + "&ContactInfoID=" + $("#ContactInfoID3").val() + "&" + $("#SignKey3").val();
 			break;
+			
+		case "Delete":
+			signStr = $("#SignKey4").val() + "&ContactInfoID=" + $("#ContactInfoID4").val() + "&" + $("#SignKey4").val();
+			break;
 	}
 	//alert(signStr);
 		
@@ -164,7 +185,11 @@ function SignCalc(Type) {
 		case "Update":
 			$("#Sign3").val(res);
 			break;
-	}	
+			
+		case "Delete":
+			$("#Sign4").val(res);
+			break;
+	}
 }
 
 </script>

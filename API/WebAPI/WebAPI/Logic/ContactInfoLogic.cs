@@ -160,6 +160,54 @@ namespace WebAPI.Logic
             }
         }
 
+        public DeleteResponse Delete(DeleteRequest objDeleteRequest)
+        {
+            DeleteResponse objDeleteResponse = new DeleteResponse();
+            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+
+            try
+            {
+                #region [Validation]
+                bool bolCheckSign = Utility.CheckSHA(objDeleteRequest.Sign.Trim(), GetSign(objDeleteRequest, ApiSignKey));
+                if (!bolCheckSign)
+                {
+                    objDeleteResponse.Result = $"{MsgFail} : Sign Validate Error";
+                    return objDeleteResponse;
+                }
+                #endregion
+
+                #region [Logic]
+                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(Convert.ToInt64(objDeleteRequest.ContactInfoID));
+                if (null == objContactInfoData)
+                {
+                    objDeleteResponse.Result = $"{MsgFail} : No Data";
+                }
+                else
+                {
+                    bool bolDeleteResult = objContactInfoRepository.DeleteContactInfo(objContactInfoData);
+                    if (bolDeleteResult)
+                    {
+                        objDeleteResponse.Result = MsgSuccess;
+                        objDeleteResponse.Sign = GetSign(objDeleteResponse, ApiSignKey);
+                    }
+                    else
+                    {
+                        objDeleteResponse.Result = $"{MsgFail} : Delete Data Error";
+                    }
+                }
+
+                return objDeleteResponse;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                #region [Exception]
+                objDeleteResponse.Result = $"{MsgException} : {ex.Message}";
+                return objDeleteResponse;
+                #endregion
+            }
+        }
+
         private static string GetSign(object objData, string strKey)
         {
             string strParams = string.Empty;
@@ -203,6 +251,20 @@ namespace WebAPI.Logic
             if (objData is UpdateResponse)
             {
                 strParams = $"{strKey}&Result={((UpdateResponse)objData).Result}&ContactInfoID={((UpdateResponse)objData).Data.ContactInfoID}&{strKey}";
+            }
+            #endregion
+
+            #region [DeleteRequest]
+            if (objData is DeleteRequest)
+            {
+                strParams = $"{strKey}&ContactInfoID={((DeleteRequest)objData).ContactInfoID}&{strKey}";
+            }
+            #endregion
+
+            #region [DeleteResponse]
+            if (objData is DeleteResponse)
+            {
+                strParams = $"{strKey}&Result={((DeleteResponse)objData).Result}&{strKey}";
             }
             #endregion
 

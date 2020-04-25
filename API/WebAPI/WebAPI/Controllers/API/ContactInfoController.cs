@@ -96,5 +96,34 @@ namespace WebAPI.Controllers.API
             HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(Utility.GetJSON(objUpdateResponse), Encoding.GetEncoding("UTF-8"), "application/json") };
             return ResponseMessage(result);
         }
+
+        [HttpPost]
+        public IHttpActionResult Delete([FromBody] DeleteRequest objDeleteRequest)
+        {
+            DeleteResponse objDeleteResponse;
+
+            if (ModelState.IsValid)
+            {
+                ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
+                objDeleteResponse = objContactInfoLogic.Delete(objDeleteRequest);
+
+                //return Ok(objDeleteResponse);
+            }
+            else
+            {
+                //return BadRequest(ModelState);
+
+                string strErrorMsg = string.Empty;
+                foreach (var item in ModelState.Values)
+                {
+                    strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
+                }
+                objDeleteResponse = new DeleteResponse() { Result = strErrorMsg };
+            }
+
+            //轉換JSON格式回傳
+            HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(Utility.GetJSON(objDeleteResponse), Encoding.GetEncoding("UTF-8"), "application/json") };
+            return ResponseMessage(result);
+        }
     }
 }
