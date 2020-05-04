@@ -4,9 +4,9 @@ namespace WcfService.Model
 {
     public class QueryBaseModel
     {
-        public Dictionary<string, object> QueryParam = new Dictionary<string, object>();
+        public Dictionary<string, object> QueryParam { get; set; }
 
-        public DataTableBase DataTableParam = new DataTableBase();
+        public DataTableBase DataTableParam { get; set; }
 
         public class DataTableBase
         {
