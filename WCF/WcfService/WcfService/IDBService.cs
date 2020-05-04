@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
+using WcfService.Model;
 
 namespace WcfService
 {
@@ -13,5 +9,22 @@ namespace WcfService
     public interface IDBService
     {
         // TODO: 在此新增您的服務作業
+        [OperationContract]
+        List<ContactInfoExModel> GetContactInfoByCondition(QueryBaseModel objQueryBaseModel);
+
+        [OperationContract]
+        ContactInfoModel GetContactInfo(long lContactInfoID);
+
+        [OperationContract]
+        bool AddContactInfo(ContactInfoModel objContactInfoModel);
+
+        [OperationContract]
+        bool UpdateContactInfo(ContactInfoModel objContactInfoModel);
+
+        [OperationContract]
+        bool DeleteContactInfo(ContactInfoModel objContactInfoModel);
+
+        [OperationContract]
+        bool AddUpdateContactInfo(ContactInfoModel objContactInfoModel);
     }
 }
