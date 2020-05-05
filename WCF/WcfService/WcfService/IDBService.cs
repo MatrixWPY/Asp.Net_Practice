@@ -16,7 +16,7 @@ namespace WcfService
         ContactInfoModel GetContactInfo(long lContactInfoID);
 
         [OperationContract]
-        bool AddContactInfo(ContactInfoModel objContactInfoModel);
+        long AddContactInfo(ContactInfoModel objContactInfoModel);
 
         [OperationContract]
         bool UpdateContactInfo(ContactInfoModel objContactInfoModel);
@@ -25,6 +25,6 @@ namespace WcfService
         bool DeleteContactInfo(ContactInfoModel objContactInfoModel);
 
         [OperationContract]
-        bool AddUpdateContactInfo(ContactInfoModel objContactInfoModel);
+        long AddUpdateContactInfo(ContactInfoModel objContactInfoModel);
     }
 }

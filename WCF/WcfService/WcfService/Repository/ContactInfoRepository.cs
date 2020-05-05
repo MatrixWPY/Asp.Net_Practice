@@ -125,9 +125,9 @@ namespace WcfService.Repository
                     {
                         objContactInfoModel.IsEnable = true;
                         objContactInfoModel.CreateTime = DateTime.Now;
-
                         long? ContactInfoID = objConnect.Insert(objContactInfoModel);
 
+                        //Set PK
                         objContactInfoModel.ContactInfoID = Convert.ToInt64(ContactInfoID);
                     }
                 }
@@ -135,9 +135,9 @@ namespace WcfService.Repository
                 {
                     objContactInfoModel.IsEnable = true;
                     objContactInfoModel.CreateTime = DateTime.Now;
-
                     long? ContactInfoID = GetDBConnection().Insert(objContactInfoModel, objOrgTran);
 
+                    //Set PK
                     objContactInfoModel.ContactInfoID = Convert.ToInt64(ContactInfoID);
                 }
 
@@ -162,14 +162,12 @@ namespace WcfService.Repository
                     using (var objConnect = GetDBConnection())
                     {
                         objContactInfoModel.UpdateTime = DateTime.Now;
-
                         objConnect.Update(objContactInfoModel);
                     }
                 }
                 else
                 {
                     objContactInfoModel.UpdateTime = DateTime.Now;
-
                     GetDBConnection().Update(objContactInfoModel, objOrgTran);
                 }
 

@@ -43,7 +43,7 @@ namespace WcfService
             return objContactInfoModel;
         }
 
-        public bool AddContactInfo(ContactInfoModel objContactInfoModel)
+        public long AddContactInfo(ContactInfoModel objContactInfoModel)
         {
             bool bolResult = false;
 
@@ -57,7 +57,7 @@ namespace WcfService
                 throw ex;
             }
 
-            return bolResult;
+            return (bolResult ? objContactInfoModel.ContactInfoID : -1);
         }
 
         public bool UpdateContactInfo(ContactInfoModel objContactInfoModel)
@@ -94,7 +94,7 @@ namespace WcfService
             return bolResult;
         }
 
-        public bool AddUpdateContactInfo(ContactInfoModel objContactInfoModel)
+        public long AddUpdateContactInfo(ContactInfoModel objContactInfoModel)
         {
             bool bolResult = false;
 
@@ -108,7 +108,7 @@ namespace WcfService
                 throw ex;
             }
 
-            return bolResult;
+            return (bolResult ? objContactInfoModel.ContactInfoID : -1);
         }
     }
 }
