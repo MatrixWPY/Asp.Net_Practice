@@ -45,18 +45,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapper.SimpleCRUD, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.SimpleCRUD.2.2.0.1\lib\netstandard2.0\Dapper.SimpleCRUD.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,23 +123,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\DBServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ContactInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\AjaxValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\ContactInfoData.cs" />
-    <Compile Include="Models\Data\ContactInfoExData.cs" />
-    <Compile Include="Models\Data\QueryBaseData.cs" />
-    <Compile Include="Models\Repository\ContactInfoRepository.cs" />
-    <Compile Include="Models\Repository\DapperBaseRepository.cs" />
+    <Compile Include="ViewModel\ContactInfo\CreateEditVM.cs" />
     <Compile Include="ViewModel\ContactInfo\IndexVM.cs" />
     <Compile Include="ViewModel\DataTableReqVM.cs" />
     <Compile Include="ViewModel\DataTableResVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\DBServiceReference\DBService.disco" />
+    <None Include="Connected Services\DBServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\DBServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\DBServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -316,6 +319,25 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Connected Services\DBServiceReference\DBService.wsdl" />
+    <None Include="Connected Services\DBServiceReference\DBService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DBServiceReference\DBService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DBServiceReference\DBService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DBServiceReference\DBService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\DBServiceReference\WebMVC.DBServiceReference.ContactInfoExModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\DBServiceReference\WebMVC.DBServiceReference.ContactInfoModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -426,6 +448,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -439,6 +462,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DBServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

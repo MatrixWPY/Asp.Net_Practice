@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using WebAPI.DBServiceReference;
 using WebAPI.Models.ContactInfo;
-using WebAPI.Models.Data;
-using WebAPI.Models.Repository;
 using WebAPI.Util;
 
 namespace WebAPI.Logic
@@ -17,7 +16,7 @@ namespace WebAPI.Logic
         public QueryResponse Query(QueryRequest objQueryRequest)
         {
             QueryResponse objQueryResponse = new QueryResponse();
-            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+            DBServiceClient clientDB = new DBServiceClient();
 
             try
             {
@@ -31,15 +30,15 @@ namespace WebAPI.Logic
                 #endregion
 
                 #region [Logic]
-                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(Convert.ToInt64(objQueryRequest.ContactInfoID));
-                if (null == objContactInfoData)
+                ContactInfoModel objContactInfoModel = clientDB.GetContactInfo(Convert.ToInt64(objQueryRequest.ContactInfoID));
+                if (null == objContactInfoModel)
                 {
                     objQueryResponse.Result = $"{MsgFail} : No Data";
                 }
                 else
                 {
                     objQueryResponse.Result = MsgSuccess;
-                    objQueryResponse.Data = objContactInfoData;
+                    objQueryResponse.Data = objContactInfoModel;
                     objQueryResponse.Sign = GetSign(objQueryResponse, ApiSignKey);
                 }
 
@@ -58,7 +57,7 @@ namespace WebAPI.Logic
         public AddResponse Add(AddRequest objAddRequest)
         {
             AddResponse objAddResponse = new AddResponse();
-            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+            DBServiceClient clientDB = new DBServiceClient();
 
             try
             {
@@ -72,19 +71,19 @@ namespace WebAPI.Logic
                 #endregion
 
                 #region [Logic]
-                ContactInfoData objContactInfoData = new ContactInfoData();
-                objContactInfoData.Name = objAddRequest.Name.Trim();
-                objContactInfoData.Nickname = (!string.IsNullOrWhiteSpace(objAddRequest.Nickname) ? objAddRequest.Nickname.Trim() : null);
-                objContactInfoData.Gender = (ContactInfoData.EnumGender?)objAddRequest.Gender;
-                objContactInfoData.Age = objAddRequest.Age;
-                objContactInfoData.PhoneNo = objAddRequest.PhoneNo.Trim();
-                objContactInfoData.Address = objAddRequest.Address.Trim();
+                ContactInfoModel objContactInfoModel = new ContactInfoModel();
+                objContactInfoModel.Name = objAddRequest.Name.Trim();
+                objContactInfoModel.Nickname = (!string.IsNullOrWhiteSpace(objAddRequest.Nickname) ? objAddRequest.Nickname.Trim() : null);
+                objContactInfoModel.Gender = (ContactInfoModel.EnumGender?)objAddRequest.Gender;
+                objContactInfoModel.Age = objAddRequest.Age;
+                objContactInfoModel.PhoneNo = objAddRequest.PhoneNo.Trim();
+                objContactInfoModel.Address = objAddRequest.Address.Trim();
 
-                bool bolAddResult = objContactInfoRepository.AddContactInfo(objContactInfoData);
-                if (bolAddResult)
+                objContactInfoModel.ContactInfoID = clientDB.AddContactInfo(objContactInfoModel);
+                if (objContactInfoModel.ContactInfoID > 0)
                 {
                     objAddResponse.Result = MsgSuccess;
-                    objAddResponse.Data = objContactInfoData;
+                    objAddResponse.Data = objContactInfoModel;
                     objAddResponse.Sign = GetSign(objAddResponse, ApiSignKey);
                 }
                 else
@@ -107,7 +106,7 @@ namespace WebAPI.Logic
         public UpdateResponse Update(UpdateRequest objUpdateRequest)
         {
             UpdateResponse objUpdateResponse = new UpdateResponse();
-            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+            DBServiceClient clientDB = new DBServiceClient();
 
             try
             {
@@ -121,25 +120,25 @@ namespace WebAPI.Logic
                 #endregion
 
                 #region [Logic]
-                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(Convert.ToInt64(objUpdateRequest.ContactInfoID));
-                if (null == objContactInfoData)
+                ContactInfoModel objContactInfoModel = clientDB.GetContactInfo(Convert.ToInt64(objUpdateRequest.ContactInfoID));
+                if (null == objContactInfoModel)
                 {
                     objUpdateResponse.Result = $"{MsgFail} : No Data";
                 }
                 else
                 {
-                    objContactInfoData.Name = objUpdateRequest.Name.Trim();
-                    objContactInfoData.Nickname = (!string.IsNullOrWhiteSpace(objUpdateRequest.Nickname) ? objUpdateRequest.Nickname.Trim() : null);
-                    objContactInfoData.Gender = (ContactInfoData.EnumGender?)objUpdateRequest.Gender;
-                    objContactInfoData.Age = objUpdateRequest.Age;
-                    objContactInfoData.PhoneNo = objUpdateRequest.PhoneNo.Trim();
-                    objContactInfoData.Address = objUpdateRequest.Address.Trim();
+                    objContactInfoModel.Name = objUpdateRequest.Name.Trim();
+                    objContactInfoModel.Nickname = (!string.IsNullOrWhiteSpace(objUpdateRequest.Nickname) ? objUpdateRequest.Nickname.Trim() : null);
+                    objContactInfoModel.Gender = (ContactInfoModel.EnumGender?)objUpdateRequest.Gender;
+                    objContactInfoModel.Age = objUpdateRequest.Age;
+                    objContactInfoModel.PhoneNo = objUpdateRequest.PhoneNo.Trim();
+                    objContactInfoModel.Address = objUpdateRequest.Address.Trim();
 
-                    bool bolUpdateResult = objContactInfoRepository.UpdateContactInfo(objContactInfoData);
+                    bool bolUpdateResult = clientDB.UpdateContactInfo(objContactInfoModel);
                     if (bolUpdateResult)
                     {
                         objUpdateResponse.Result = MsgSuccess;
-                        objUpdateResponse.Data = objContactInfoData;
+                        objUpdateResponse.Data = objContactInfoModel;
                         objUpdateResponse.Sign = GetSign(objUpdateResponse, ApiSignKey);
                     }
                     else
@@ -163,7 +162,7 @@ namespace WebAPI.Logic
         public DeleteResponse Delete(DeleteRequest objDeleteRequest)
         {
             DeleteResponse objDeleteResponse = new DeleteResponse();
-            ContactInfoRepository objContactInfoRepository = new ContactInfoRepository();
+            DBServiceClient clientDB = new DBServiceClient();
 
             try
             {
@@ -177,14 +176,14 @@ namespace WebAPI.Logic
                 #endregion
 
                 #region [Logic]
-                ContactInfoData objContactInfoData = objContactInfoRepository.GetContactInfo(Convert.ToInt64(objDeleteRequest.ContactInfoID));
-                if (null == objContactInfoData)
+                ContactInfoModel objContactInfoModel = clientDB.GetContactInfo(Convert.ToInt64(objDeleteRequest.ContactInfoID));
+                if (null == objContactInfoModel)
                 {
                     objDeleteResponse.Result = $"{MsgFail} : No Data";
                 }
                 else
                 {
-                    bool bolDeleteResult = objContactInfoRepository.DeleteContactInfo(objContactInfoData);
+                    bool bolDeleteResult = clientDB.DeleteContactInfo(objContactInfoModel);
                     if (bolDeleteResult)
                     {
                         objDeleteResponse.Result = MsgSuccess;

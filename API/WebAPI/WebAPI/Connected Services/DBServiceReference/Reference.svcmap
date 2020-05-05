@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6bc73de0-eae9-4dcd-a318-d49411d07b42" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6465/DBService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DBService.xsd" MetadataType="Schema" ID="211a3527-9ae8-43ee-89ed-175c22caaf15" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DBService1.xsd" MetadataType="Schema" ID="3af973e4-d45c-4562-8957-440bd66a0db6" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DBService.wsdl" MetadataType="Wsdl" ID="e86d37b4-cfe7-42c3-aaaa-ff30a481b90c" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?wsdl" />
+    <MetadataFile FileName="DBService2.xsd" MetadataType="Schema" ID="a69494f5-e092-497f-adeb-47bffc267e02" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DBService.disco" MetadataType="Disco" ID="728dfd11-e0ad-4d67-90c5-d99d273c33e9" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?disco" />
+    <MetadataFile FileName="DBService3.xsd" MetadataType="Schema" ID="1458dc97-ae46-411a-aa2a-73f341e0ccda" SourceId="1" SourceUrl="http://localhost:6465/DBService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

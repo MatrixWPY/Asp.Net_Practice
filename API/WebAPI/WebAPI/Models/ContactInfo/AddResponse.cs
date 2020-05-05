@@ -1,4 +1,4 @@
-﻿using WebAPI.Models.Data;
+﻿using WebAPI.DBServiceReference;
 
 namespace WebAPI.Models.ContactInfo
 {
@@ -6,7 +6,7 @@ namespace WebAPI.Models.ContactInfo
     {
         public string Result { get; set; }
 
-        public ContactInfoData Data { get; set; }
+        public ContactInfoModel Data { get; set; }
 
         public string Sign { get; set; }
     }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6465/DBService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="QueryBaseModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DataTableParam" nillable="true" type="tns:QueryBaseModel.DataTableBase" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="QueryParam" nillable="true" type="q1:ArrayOfKeyValueOfstringanyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryBaseModel" nillable="true" type="tns:QueryBaseModel" />
+  <xs:complexType name="QueryBaseModel.DataTableBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderColumn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderDir" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageRowCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PageStartRow" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryBaseModel.DataTableBase" nillable="true" type="tns:QueryBaseModel.DataTableBase" />
+  <xs:complexType name="ArrayOfContactInfoExModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactInfoExModel" nillable="true" type="tns:ContactInfoExModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactInfoExModel" nillable="true" type="tns:ArrayOfContactInfoExModel" />
+  <xs:complexType name="ContactInfoExModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ContactInfoModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TotalCount" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactInfoExModel" nillable="true" type="tns:ContactInfoExModel" />
+  <xs:complexType name="ContactInfoModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Age" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactInfoID" type="xs:long" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="tns:ContactInfoModel.EnumGender" />
+      <xs:element minOccurs="0" name="IsEnable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ContactInfoModel" nillable="true" type="tns:ContactInfoModel" />
+  <xs:simpleType name="ContactInfoModel.EnumGender">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Female" />
+      <xs:enumeration value="Male" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ContactInfoModel.EnumGender" nillable="true" type="tns:ContactInfoModel.EnumGender" />
+</xs:schema>

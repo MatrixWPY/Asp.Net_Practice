@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DBService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6465/DBService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6465/DBService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6465/DBService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService.Model" />
+      <xsd:import schemaLocation="http://localhost:6465/DBService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDBService_GetContactInfoByCondition_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoByCondition" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoByCondition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoByConditionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_AddContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_AddContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_AddUpdateContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUpdateContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_AddUpdateContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUpdateContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDBService">
+    <wsdl:operation name="GetContactInfoByCondition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoByCondition" message="tns:IDBService_GetContactInfoByCondition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoByConditionResponse" message="tns:IDBService_GetContactInfoByCondition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfo" message="tns:IDBService_GetContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoResponse" message="tns:IDBService_GetContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/AddContactInfo" message="tns:IDBService_AddContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/AddContactInfoResponse" message="tns:IDBService_AddContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfo" message="tns:IDBService_UpdateContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfoResponse" message="tns:IDBService_UpdateContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfo" message="tns:IDBService_DeleteContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfoResponse" message="tns:IDBService_DeleteContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/AddUpdateContactInfo" message="tns:IDBService_AddUpdateContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/AddUpdateContactInfoResponse" message="tns:IDBService_AddUpdateContactInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDBService" type="tns:IDBService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetContactInfoByCondition">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfoByCondition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfo">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactInfo">
+      <soap:operation soapAction="http://tempuri.org/IDBService/AddContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfo">
+      <soap:operation soapAction="http://tempuri.org/IDBService/UpdateContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfo">
+      <soap:operation soapAction="http://tempuri.org/IDBService/DeleteContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateContactInfo">
+      <soap:operation soapAction="http://tempuri.org/IDBService/AddUpdateContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DBService">
+    <wsdl:port name="BasicHttpBinding_IDBService" binding="tns:BasicHttpBinding_IDBService">
+      <soap:address location="http://localhost:6465/DBService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
