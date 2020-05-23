@@ -163,12 +163,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\API\ContactInfoController.cs" />
+    <Compile Include="Controllers\API\ContactInfoRESTfulController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\ContactInfoLogic.cs" />
+    <Compile Include="Models\ContactInfoRESTful\AddRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\AddResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\DeleteRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\DeleteResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\QueryRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\QueryResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\UpdateRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\UpdateResponse.cs" />
     <Compile Include="Models\ContactInfo\AddRequest.cs" />
     <Compile Include="Models\ContactInfo\AddResponse.cs" />
     <Compile Include="Models\ContactInfo\DeleteRequest.cs" />
@@ -179,6 +188,7 @@
     <Compile Include="Models\ContactInfo\UpdateResponse.cs" />
     <Compile Include="Models\Data\ContactInfoData.cs" />
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
+    <Compile Include="Models\Repository\ContactInfoRESTfulRepository.cs" />
     <Compile Include="Models\Repository\DapperBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Utility.cs" />
