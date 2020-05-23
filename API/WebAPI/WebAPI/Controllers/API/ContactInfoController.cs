@@ -15,7 +15,7 @@ namespace WebAPI.Controllers.API
         {
             QueryResponse objQueryResponse;
 
-            if (ModelState.IsValid)
+            if (null != objQueryRequest && ModelState.IsValid)
             {
                 ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
                 objQueryResponse = objContactInfoLogic.Query(objQueryRequest);
@@ -31,7 +31,7 @@ namespace WebAPI.Controllers.API
                 {
                     strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
                 }
-                objQueryResponse = new QueryResponse() { Result = strErrorMsg };
+                objQueryResponse = new QueryResponse() { Result = string.IsNullOrWhiteSpace(strErrorMsg) ? "Request Format Error" : strErrorMsg };
             }
 
             //轉換JSON格式回傳
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers.API
         {
             AddResponse objAddResponse;
 
-            if (ModelState.IsValid)
+            if (null != objAddRequest && ModelState.IsValid)
             {
                 ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
                 objAddResponse = objContactInfoLogic.Add(objAddRequest);
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers.API
                 {
                     strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
                 }
-                objAddResponse = new AddResponse() { Result = strErrorMsg };
+                objAddResponse = new AddResponse() { Result = string.IsNullOrWhiteSpace(strErrorMsg) ? "Request Format Error" : strErrorMsg };
             }
 
             //轉換JSON格式回傳
@@ -73,7 +73,7 @@ namespace WebAPI.Controllers.API
         {
             UpdateResponse objUpdateResponse;
 
-            if (ModelState.IsValid)
+            if (null != objUpdateRequest && ModelState.IsValid)
             {
                 ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
                 objUpdateResponse = objContactInfoLogic.Update(objUpdateRequest);
@@ -89,7 +89,7 @@ namespace WebAPI.Controllers.API
                 {
                     strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
                 }
-                objUpdateResponse = new UpdateResponse() { Result = strErrorMsg };
+                objUpdateResponse = new UpdateResponse() { Result = string.IsNullOrWhiteSpace(strErrorMsg) ? "Request Format Error" : strErrorMsg };
             }
 
             //轉換JSON格式回傳
@@ -102,7 +102,7 @@ namespace WebAPI.Controllers.API
         {
             DeleteResponse objDeleteResponse;
 
-            if (ModelState.IsValid)
+            if (null != objDeleteRequest && ModelState.IsValid)
             {
                 ContactInfoLogic objContactInfoLogic = new ContactInfoLogic();
                 objDeleteResponse = objContactInfoLogic.Delete(objDeleteRequest);
@@ -118,7 +118,7 @@ namespace WebAPI.Controllers.API
                 {
                     strErrorMsg += string.Join(",", item.Errors.Select(e => e.ErrorMessage));
                 }
-                objDeleteResponse = new DeleteResponse() { Result = strErrorMsg };
+                objDeleteResponse = new DeleteResponse() { Result = string.IsNullOrWhiteSpace(strErrorMsg) ? "Request Format Error" : strErrorMsg };
             }
 
             //轉換JSON格式回傳
