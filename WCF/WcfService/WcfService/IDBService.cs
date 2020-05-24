@@ -26,5 +26,19 @@ namespace WcfService
 
         [OperationContract]
         long AddUpdateContactInfo(ContactInfoModel objContactInfoModel);
+
+        #region [WebAPI RESTful]
+        [OperationContract]
+        ContactInfoModel GetContactInfoRESTful(long lContactInfoID);
+
+        [OperationContract]
+        long InsertContactInfoRESTful(ContactInfoModel objContactInfoModel);
+
+        [OperationContract]
+        bool UpdateContactInfoRESTful(ContactInfoModel objContactInfoModel);
+
+        [OperationContract]
+        bool DeleteContactInfoRESTful(ContactInfoModel objContactInfoModel);
+        #endregion
     }
 }

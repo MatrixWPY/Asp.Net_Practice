@@ -82,6 +82,7 @@
     <Compile Include="Model\QueryBaseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ContactInfoRepository.cs" />
+    <Compile Include="Repository\ContactInfoRESTfulRepository.cs" />
     <Compile Include="Repository\DapperBaseRepository.cs" />
   </ItemGroup>
   <ItemGroup>

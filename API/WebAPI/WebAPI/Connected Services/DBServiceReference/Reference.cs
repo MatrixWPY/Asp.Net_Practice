@@ -429,6 +429,30 @@ namespace WebAPI.DBServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/AddUpdateContactInfo", ReplyAction="http://tempuri.org/IDBService/AddUpdateContactInfoResponse")]
         System.Threading.Tasks.Task<long> AddUpdateContactInfoAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/GetContactInfoRESTfulResponse")]
+        WebAPI.DBServiceReference.ContactInfoModel GetContactInfoRESTful(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/GetContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<WebAPI.DBServiceReference.ContactInfoModel> GetContactInfoRESTfulAsync(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoRESTfulResponse")]
+        long InsertContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<long> InsertContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoRESTfulResponse")]
+        bool UpdateContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<bool> UpdateContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoRESTfulResponse")]
+        bool DeleteContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<bool> DeleteContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -504,6 +528,38 @@ namespace WebAPI.DBServiceReference {
         
         public System.Threading.Tasks.Task<long> AddUpdateContactInfoAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
             return base.Channel.AddUpdateContactInfoAsync(objContactInfoModel);
+        }
+        
+        public WebAPI.DBServiceReference.ContactInfoModel GetContactInfoRESTful(long lContactInfoID) {
+            return base.Channel.GetContactInfoRESTful(lContactInfoID);
+        }
+        
+        public System.Threading.Tasks.Task<WebAPI.DBServiceReference.ContactInfoModel> GetContactInfoRESTfulAsync(long lContactInfoID) {
+            return base.Channel.GetContactInfoRESTfulAsync(lContactInfoID);
+        }
+        
+        public long InsertContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.InsertContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<long> InsertContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.InsertContactInfoRESTfulAsync(objContactInfoModel);
+        }
+        
+        public bool UpdateContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.UpdateContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.UpdateContactInfoRESTfulAsync(objContactInfoModel);
+        }
+        
+        public bool DeleteContactInfoRESTful(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.DeleteContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteContactInfoRESTfulAsync(WebAPI.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.DeleteContactInfoRESTfulAsync(objContactInfoModel);
         }
     }
 }

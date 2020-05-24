@@ -163,12 +163,21 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\API\ContactInfoController.cs" />
+    <Compile Include="Controllers\API\ContactInfoRESTfulController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\ContactInfoLogic.cs" />
+    <Compile Include="Models\ContactInfoRESTful\AddRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\AddResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\DeleteRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\DeleteResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\QueryRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\QueryResponse.cs" />
+    <Compile Include="Models\ContactInfoRESTful\UpdateRequest.cs" />
+    <Compile Include="Models\ContactInfoRESTful\UpdateResponse.cs" />
     <Compile Include="Models\ContactInfo\AddRequest.cs" />
     <Compile Include="Models\ContactInfo\AddResponse.cs" />
     <Compile Include="Models\ContactInfo\DeleteRequest.cs" />

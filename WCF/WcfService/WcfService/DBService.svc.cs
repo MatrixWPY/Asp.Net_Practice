@@ -110,5 +110,75 @@ namespace WcfService
 
             return (bolResult ? objContactInfoModel.ContactInfoID : -1);
         }
+
+        #region [WebAPI RESTful]
+        public ContactInfoModel GetContactInfoRESTful(long lContactInfoID)
+        {
+            ContactInfoModel objContactInfoModel = null;
+
+            try
+            {
+                ContactInfoRESTfulRepository objContactInfoRESTfulRepo = new ContactInfoRESTfulRepository();
+                objContactInfoModel = objContactInfoRESTfulRepo.Query(lContactInfoID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return objContactInfoModel;
+        }
+
+        public long InsertContactInfoRESTful(ContactInfoModel objContactInfoModel)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoRESTfulRepository objContactInfoRESTfulRepo = new ContactInfoRESTfulRepository();
+                bolResult = objContactInfoRESTfulRepo.Insert(objContactInfoModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return (bolResult ? objContactInfoModel.ContactInfoID : -1);
+        }
+
+        public bool UpdateContactInfoRESTful(ContactInfoModel objContactInfoModel)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoRESTfulRepository objContactInfoRESTfulRepo = new ContactInfoRESTfulRepository();
+                bolResult = objContactInfoRESTfulRepo.Update(objContactInfoModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return bolResult;
+        }
+
+        public bool DeleteContactInfoRESTful(ContactInfoModel objContactInfoModel)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoRESTfulRepository objContactInfoRESTfulRepo = new ContactInfoRESTfulRepository();
+                bolResult = objContactInfoRESTfulRepo.Delete(objContactInfoModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return bolResult;
+        }
+        #endregion
     }
 }
