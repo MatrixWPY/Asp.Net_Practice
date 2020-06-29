@@ -47,8 +47,17 @@
     <Reference Include="Dapper.SimpleCRUD, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.SimpleCRUD.2.2.0.1\lib\netstandard2.0\Dapper.SimpleCRUD.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -70,6 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBService.svc" />
+    <Content Include="Model\LocalDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LocalDB.Context.cs</LastGenOutput>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\LocalDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+      <LastGenOutput>LocalDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -79,8 +98,27 @@
     <Compile Include="IDBService.cs" />
     <Compile Include="Model\ContactInfoModel.cs" />
     <Compile Include="Model\ContactInfoExModel.cs" />
+    <Compile Include="Model\LocalDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LocalDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LocalDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model\QueryBaseModel.cs" />
+    <Compile Include="Model\Tbl_ContactInfo.cs">
+      <DependentUpon>LocalDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ContactInfoEFRepository.cs" />
     <Compile Include="Repository\ContactInfoRepository.cs" />
     <Compile Include="Repository\ContactInfoRESTfulRepository.cs" />
     <Compile Include="Repository\DapperBaseRepository.cs" />
@@ -89,6 +127,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Model\LocalDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LocalDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\LocalDB.edmx.diagram">
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -96,6 +141,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

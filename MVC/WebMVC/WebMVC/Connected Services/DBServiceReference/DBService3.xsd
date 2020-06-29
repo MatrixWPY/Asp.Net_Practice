@@ -55,4 +55,25 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ContactInfoModel.EnumGender" nillable="true" type="tns:ContactInfoModel.EnumGender" />
+  <xs:complexType name="ArrayOfTbl_ContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tbl_ContactInfo" nillable="true" type="tns:Tbl_ContactInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTbl_ContactInfo" nillable="true" type="tns:ArrayOfTbl_ContactInfo" />
+  <xs:complexType name="Tbl_ContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Age" nillable="true" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="ContactInfoID" type="xs:long" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="IsEnable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_ContactInfo" nillable="true" type="tns:Tbl_ContactInfo" />
 </xs:schema>

@@ -40,5 +40,25 @@ namespace WcfService
         [OperationContract]
         bool DeleteContactInfoRESTful(ContactInfoModel objContactInfoModel);
         #endregion
+
+        #region [WebMVC EF]
+        [OperationContract]
+        int GetContactInfoEFTotalCnt();
+
+        [OperationContract]
+        List<Tbl_ContactInfo> GetContactInfoEFByCondition(QueryBaseModel objQueryBaseModel);
+
+        [OperationContract]
+        Tbl_ContactInfo GetContactInfoEF(long lContactInfoID);
+
+        [OperationContract]
+        long InsertContactInfoEF(Tbl_ContactInfo objContactInfo);
+
+        [OperationContract]
+        bool UpdateContactInfoEF(Tbl_ContactInfo objContactInfo);
+
+        [OperationContract]
+        bool DeleteContactInfoEF(Tbl_ContactInfo objContactInfo);
+        #endregion
     }
 }

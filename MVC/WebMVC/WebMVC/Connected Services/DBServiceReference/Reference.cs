@@ -390,6 +390,195 @@ namespace WebMVC.DBServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Tbl_ContactInfo", Namespace="http://schemas.datacontract.org/2004/07/WcfService.Model")]
+    [System.SerializableAttribute()]
+    public partial class Tbl_ContactInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<byte> AgeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ContactInfoIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<byte> GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsEnableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateTimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<byte> Age {
+            get {
+                return this.AgeField;
+            }
+            set {
+                if ((this.AgeField.Equals(value) != true)) {
+                    this.AgeField = value;
+                    this.RaisePropertyChanged("Age");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ContactInfoID {
+            get {
+                return this.ContactInfoIDField;
+            }
+            set {
+                if ((this.ContactInfoIDField.Equals(value) != true)) {
+                    this.ContactInfoIDField = value;
+                    this.RaisePropertyChanged("ContactInfoID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<byte> Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((this.GenderField.Equals(value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsEnable {
+            get {
+                return this.IsEnableField;
+            }
+            set {
+                if ((this.IsEnableField.Equals(value) != true)) {
+                    this.IsEnableField = value;
+                    this.RaisePropertyChanged("IsEnable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNo {
+            get {
+                return this.PhoneNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNoField, value) != true)) {
+                    this.PhoneNoField = value;
+                    this.RaisePropertyChanged("PhoneNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateTime {
+            get {
+                return this.UpdateTimeField;
+            }
+            set {
+                if ((this.UpdateTimeField.Equals(value) != true)) {
+                    this.UpdateTimeField = value;
+                    this.RaisePropertyChanged("UpdateTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DBServiceReference.IDBService")]
     public interface IDBService {
@@ -429,6 +618,66 @@ namespace WebMVC.DBServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/AddUpdateContactInfo", ReplyAction="http://tempuri.org/IDBService/AddUpdateContactInfoResponse")]
         System.Threading.Tasks.Task<long> AddUpdateContactInfoAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/GetContactInfoRESTfulResponse")]
+        WebMVC.DBServiceReference.ContactInfoModel GetContactInfoRESTful(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/GetContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<WebMVC.DBServiceReference.ContactInfoModel> GetContactInfoRESTfulAsync(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoRESTfulResponse")]
+        long InsertContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<long> InsertContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoRESTfulResponse")]
+        bool UpdateContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<bool> UpdateContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoRESTfulResponse")]
+        bool DeleteContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoRESTful", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoRESTfulResponse")]
+        System.Threading.Tasks.Task<bool> DeleteContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEFTotalCnt", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFTotalCntResponse")]
+        int GetContactInfoEFTotalCnt();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEFTotalCnt", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFTotalCntResponse")]
+        System.Threading.Tasks.Task<int> GetContactInfoEFTotalCntAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEFByCondition", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFByConditionResponse")]
+        WebMVC.DBServiceReference.Tbl_ContactInfo[] GetContactInfoEFByCondition(WebMVC.DBServiceReference.QueryBaseModel objQueryBaseModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEFByCondition", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFByConditionResponse")]
+        System.Threading.Tasks.Task<WebMVC.DBServiceReference.Tbl_ContactInfo[]> GetContactInfoEFByConditionAsync(WebMVC.DBServiceReference.QueryBaseModel objQueryBaseModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEF", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFResponse")]
+        WebMVC.DBServiceReference.Tbl_ContactInfo GetContactInfoEF(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/GetContactInfoEF", ReplyAction="http://tempuri.org/IDBService/GetContactInfoEFResponse")]
+        System.Threading.Tasks.Task<WebMVC.DBServiceReference.Tbl_ContactInfo> GetContactInfoEFAsync(long lContactInfoID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoEF", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoEFResponse")]
+        long InsertContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/InsertContactInfoEF", ReplyAction="http://tempuri.org/IDBService/InsertContactInfoEFResponse")]
+        System.Threading.Tasks.Task<long> InsertContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoEF", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoEFResponse")]
+        bool UpdateContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/UpdateContactInfoEF", ReplyAction="http://tempuri.org/IDBService/UpdateContactInfoEFResponse")]
+        System.Threading.Tasks.Task<bool> UpdateContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoEF", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoEFResponse")]
+        bool DeleteContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBService/DeleteContactInfoEF", ReplyAction="http://tempuri.org/IDBService/DeleteContactInfoEFResponse")]
+        System.Threading.Tasks.Task<bool> DeleteContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -504,6 +753,86 @@ namespace WebMVC.DBServiceReference {
         
         public System.Threading.Tasks.Task<long> AddUpdateContactInfoAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
             return base.Channel.AddUpdateContactInfoAsync(objContactInfoModel);
+        }
+        
+        public WebMVC.DBServiceReference.ContactInfoModel GetContactInfoRESTful(long lContactInfoID) {
+            return base.Channel.GetContactInfoRESTful(lContactInfoID);
+        }
+        
+        public System.Threading.Tasks.Task<WebMVC.DBServiceReference.ContactInfoModel> GetContactInfoRESTfulAsync(long lContactInfoID) {
+            return base.Channel.GetContactInfoRESTfulAsync(lContactInfoID);
+        }
+        
+        public long InsertContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.InsertContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<long> InsertContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.InsertContactInfoRESTfulAsync(objContactInfoModel);
+        }
+        
+        public bool UpdateContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.UpdateContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.UpdateContactInfoRESTfulAsync(objContactInfoModel);
+        }
+        
+        public bool DeleteContactInfoRESTful(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.DeleteContactInfoRESTful(objContactInfoModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteContactInfoRESTfulAsync(WebMVC.DBServiceReference.ContactInfoModel objContactInfoModel) {
+            return base.Channel.DeleteContactInfoRESTfulAsync(objContactInfoModel);
+        }
+        
+        public int GetContactInfoEFTotalCnt() {
+            return base.Channel.GetContactInfoEFTotalCnt();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetContactInfoEFTotalCntAsync() {
+            return base.Channel.GetContactInfoEFTotalCntAsync();
+        }
+        
+        public WebMVC.DBServiceReference.Tbl_ContactInfo[] GetContactInfoEFByCondition(WebMVC.DBServiceReference.QueryBaseModel objQueryBaseModel) {
+            return base.Channel.GetContactInfoEFByCondition(objQueryBaseModel);
+        }
+        
+        public System.Threading.Tasks.Task<WebMVC.DBServiceReference.Tbl_ContactInfo[]> GetContactInfoEFByConditionAsync(WebMVC.DBServiceReference.QueryBaseModel objQueryBaseModel) {
+            return base.Channel.GetContactInfoEFByConditionAsync(objQueryBaseModel);
+        }
+        
+        public WebMVC.DBServiceReference.Tbl_ContactInfo GetContactInfoEF(long lContactInfoID) {
+            return base.Channel.GetContactInfoEF(lContactInfoID);
+        }
+        
+        public System.Threading.Tasks.Task<WebMVC.DBServiceReference.Tbl_ContactInfo> GetContactInfoEFAsync(long lContactInfoID) {
+            return base.Channel.GetContactInfoEFAsync(lContactInfoID);
+        }
+        
+        public long InsertContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.InsertContactInfoEF(objContactInfo);
+        }
+        
+        public System.Threading.Tasks.Task<long> InsertContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.InsertContactInfoEFAsync(objContactInfo);
+        }
+        
+        public bool UpdateContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.UpdateContactInfoEF(objContactInfo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.UpdateContactInfoEFAsync(objContactInfo);
+        }
+        
+        public bool DeleteContactInfoEF(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.DeleteContactInfoEF(objContactInfo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteContactInfoEFAsync(WebMVC.DBServiceReference.Tbl_ContactInfo objContactInfo) {
+            return base.Channel.DeleteContactInfoEFAsync(objContactInfo);
         }
     }
 }

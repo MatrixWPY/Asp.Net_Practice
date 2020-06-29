@@ -129,11 +129,14 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ContactInfoController.cs" />
+    <Compile Include="Controllers\ContactInfoEFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\AjaxValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ContactInfoEF\CreateEditVM.cs" />
+    <Compile Include="ViewModel\ContactInfoEF\IndexVM.cs" />
     <Compile Include="ViewModel\ContactInfo\CreateEditVM.cs" />
     <Compile Include="ViewModel\ContactInfo\IndexVM.cs" />
     <Compile Include="ViewModel\DataTableReqVM.cs" />
@@ -338,6 +341,9 @@
     <Content Include="Connected Services\DBServiceReference\WebMVC.DBServiceReference.ContactInfoModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\DBServiceReference\WebMVC.DBServiceReference.Tbl_ContactInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -445,6 +451,11 @@
     <Content Include="Views\ContactInfo\Edit.cshtml" />
     <Content Include="Views\ContactInfo\Delete.cshtml" />
     <Content Include="Views\ContactInfo\CreateUpdate.cshtml" />
+    <Content Include="Views\ContactInfoEF\Index.cshtml" />
+    <Content Include="Views\ContactInfoEF\Details.cshtml" />
+    <Content Include="Views\ContactInfoEF\Create.cshtml" />
+    <Content Include="Views\ContactInfoEF\Edit.cshtml" />
+    <Content Include="Views\ContactInfoEF\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

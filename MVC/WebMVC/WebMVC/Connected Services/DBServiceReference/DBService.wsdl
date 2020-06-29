@@ -44,6 +44,66 @@
   <wsdl:message name="IDBService_AddUpdateContactInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUpdateContactInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoRESTful_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoRESTful" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoRESTful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoRESTfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_InsertContactInfoRESTful_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertContactInfoRESTful" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_InsertContactInfoRESTful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertContactInfoRESTfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfoRESTful_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfoRESTful" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfoRESTful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfoRESTfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfoRESTful_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfoRESTful" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfoRESTful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfoRESTfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEFTotalCnt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEFTotalCnt" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEFTotalCnt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEFTotalCntResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEFByCondition_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEFByCondition" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEFByCondition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEFByConditionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEF_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEF" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_GetContactInfoEF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoEFResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_InsertContactInfoEF_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertContactInfoEF" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_InsertContactInfoEF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertContactInfoEFResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfoEF_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfoEF" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_UpdateContactInfoEF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactInfoEFResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfoEF_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfoEF" />
+  </wsdl:message>
+  <wsdl:message name="IDBService_DeleteContactInfoEF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactInfoEFResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDBService">
     <wsdl:operation name="GetContactInfoByCondition">
       <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoByCondition" message="tns:IDBService_GetContactInfoByCondition_InputMessage" />
@@ -68,6 +128,46 @@
     <wsdl:operation name="AddUpdateContactInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IDBService/AddUpdateContactInfo" message="tns:IDBService_AddUpdateContactInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDBService/AddUpdateContactInfoResponse" message="tns:IDBService_AddUpdateContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoRESTful">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoRESTful" message="tns:IDBService_GetContactInfoRESTful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoRESTfulResponse" message="tns:IDBService_GetContactInfoRESTful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertContactInfoRESTful">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/InsertContactInfoRESTful" message="tns:IDBService_InsertContactInfoRESTful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/InsertContactInfoRESTfulResponse" message="tns:IDBService_InsertContactInfoRESTful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfoRESTful">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfoRESTful" message="tns:IDBService_UpdateContactInfoRESTful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfoRESTfulResponse" message="tns:IDBService_UpdateContactInfoRESTful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfoRESTful">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfoRESTful" message="tns:IDBService_DeleteContactInfoRESTful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfoRESTfulResponse" message="tns:IDBService_DeleteContactInfoRESTful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEFTotalCnt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEFTotalCnt" message="tns:IDBService_GetContactInfoEFTotalCnt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEFTotalCntResponse" message="tns:IDBService_GetContactInfoEFTotalCnt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEFByCondition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEFByCondition" message="tns:IDBService_GetContactInfoEFByCondition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEFByConditionResponse" message="tns:IDBService_GetContactInfoEFByCondition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEF">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEF" message="tns:IDBService_GetContactInfoEF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/GetContactInfoEFResponse" message="tns:IDBService_GetContactInfoEF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertContactInfoEF">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/InsertContactInfoEF" message="tns:IDBService_InsertContactInfoEF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/InsertContactInfoEFResponse" message="tns:IDBService_InsertContactInfoEF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfoEF">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfoEF" message="tns:IDBService_UpdateContactInfoEF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/UpdateContactInfoEFResponse" message="tns:IDBService_UpdateContactInfoEF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfoEF">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfoEF" message="tns:IDBService_DeleteContactInfoEF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBService/DeleteContactInfoEFResponse" message="tns:IDBService_DeleteContactInfoEF_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDBService" type="tns:IDBService">
@@ -119,6 +219,96 @@
     </wsdl:operation>
     <wsdl:operation name="AddUpdateContactInfo">
       <soap:operation soapAction="http://tempuri.org/IDBService/AddUpdateContactInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoRESTful">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfoRESTful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertContactInfoRESTful">
+      <soap:operation soapAction="http://tempuri.org/IDBService/InsertContactInfoRESTful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfoRESTful">
+      <soap:operation soapAction="http://tempuri.org/IDBService/UpdateContactInfoRESTful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfoRESTful">
+      <soap:operation soapAction="http://tempuri.org/IDBService/DeleteContactInfoRESTful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEFTotalCnt">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfoEFTotalCnt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEFByCondition">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfoEFByCondition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfoEF">
+      <soap:operation soapAction="http://tempuri.org/IDBService/GetContactInfoEF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertContactInfoEF">
+      <soap:operation soapAction="http://tempuri.org/IDBService/InsertContactInfoEF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactInfoEF">
+      <soap:operation soapAction="http://tempuri.org/IDBService/UpdateContactInfoEF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactInfoEF">
+      <soap:operation soapAction="http://tempuri.org/IDBService/DeleteContactInfoEF" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

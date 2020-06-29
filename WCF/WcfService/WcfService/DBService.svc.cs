@@ -180,5 +180,109 @@ namespace WcfService
             return bolResult;
         }
         #endregion
+
+        #region [WebMVC EF]
+        public int GetContactInfoEFTotalCnt()
+        {
+            int iTotalCnt = 0;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                iTotalCnt = objContactInfoEFRepo.QueryTotalCnt();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return iTotalCnt;
+        }
+
+        public List<Tbl_ContactInfo> GetContactInfoEFByCondition(QueryBaseModel objQueryBaseModel)
+        {
+            List<Tbl_ContactInfo> liContactInfo = null;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                liContactInfo = objContactInfoEFRepo.QueryByCondition(objQueryBaseModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return liContactInfo;
+        }
+
+        public Tbl_ContactInfo GetContactInfoEF(long lContactInfoID)
+        {
+            Tbl_ContactInfo objContactInfo = null;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                objContactInfo = objContactInfoEFRepo.Query(lContactInfoID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return objContactInfo;
+        }
+
+        public long InsertContactInfoEF(Tbl_ContactInfo objContactInfo)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                bolResult = objContactInfoEFRepo.Insert(objContactInfo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return (bolResult ? objContactInfo.ContactInfoID : -1);
+        }
+
+        public bool UpdateContactInfoEF(Tbl_ContactInfo objContactInfo)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                bolResult = objContactInfoEFRepo.Update(objContactInfo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return bolResult;
+        }
+
+        public bool DeleteContactInfoEF(Tbl_ContactInfo objContactInfo)
+        {
+            bool bolResult = false;
+
+            try
+            {
+                ContactInfoEFRepository objContactInfoEFRepo = new ContactInfoEFRepository();
+                bolResult = objContactInfoEFRepo.Delete(objContactInfo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return bolResult;
+        }
+        #endregion
     }
 }
