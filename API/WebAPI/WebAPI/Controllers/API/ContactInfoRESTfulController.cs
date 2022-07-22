@@ -73,6 +73,8 @@ namespace WebAPI.Controllers.API
                     objContactInfoModel.Age = objAddRequest.Age;
                     objContactInfoModel.PhoneNo = objAddRequest.PhoneNo.Trim();
                     objContactInfoModel.Address = objAddRequest.Address.Trim();
+                    objContactInfoModel.IsEnable = true;
+                    objContactInfoModel.CreateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     objContactInfoModel.ContactInfoID = clientDB.InsertContactInfoRESTful(objContactInfoModel);
@@ -131,6 +133,7 @@ namespace WebAPI.Controllers.API
                         objContactInfoModel.Age = objUpdateRequest.Age;
                         objContactInfoModel.PhoneNo = objUpdateRequest.PhoneNo.Trim();
                         objContactInfoModel.Address = objUpdateRequest.Address.Trim();
+                        objContactInfoModel.UpdateTime = DateTime.Now;
 
                         bool bolResult = clientDB.UpdateContactInfoRESTful(objContactInfoModel);
                         if (bolResult)

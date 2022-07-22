@@ -78,6 +78,8 @@ namespace WebAPI.Logic
                 objContactInfoModel.Age = objAddRequest.Age;
                 objContactInfoModel.PhoneNo = objAddRequest.PhoneNo.Trim();
                 objContactInfoModel.Address = objAddRequest.Address.Trim();
+                objContactInfoModel.IsEnable = true;
+                objContactInfoModel.CreateTime = DateTime.Now;
 
                 objContactInfoModel.ContactInfoID = clientDB.AddContactInfo(objContactInfoModel);
                 if (objContactInfoModel.ContactInfoID > 0)
@@ -133,6 +135,7 @@ namespace WebAPI.Logic
                     objContactInfoModel.Age = objUpdateRequest.Age;
                     objContactInfoModel.PhoneNo = objUpdateRequest.PhoneNo.Trim();
                     objContactInfoModel.Address = objUpdateRequest.Address.Trim();
+                    objContactInfoModel.UpdateTime = DateTime.Now;
 
                     bool bolUpdateResult = clientDB.UpdateContactInfo(objContactInfoModel);
                     if (bolUpdateResult)

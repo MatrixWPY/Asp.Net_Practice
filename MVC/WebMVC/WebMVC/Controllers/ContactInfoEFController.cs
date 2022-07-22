@@ -81,6 +81,8 @@ namespace WebMVC.Controllers
                     objContactInfo.Age = (byte?)objCreateEditVM.Age;
                     objContactInfo.PhoneNo = objCreateEditVM.PhoneNo.Trim();
                     objContactInfo.Address = objCreateEditVM.Address.Trim();
+                    objContactInfo.IsEnable = true;
+                    objContactInfo.CreateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     clientDB.InsertContactInfoEF(objContactInfo);
@@ -126,6 +128,7 @@ namespace WebMVC.Controllers
                 Tbl_ContactInfo objContactInfo = clientDB.GetContactInfoEF(id);
                 if (null != objContactInfo && TryUpdateModel<Tbl_ContactInfo>(objContactInfo, "", objFormCollection.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
                 {
+                    objContactInfo.UpdateTime = DateTime.Now;
                     clientDB.UpdateContactInfoEF(objContactInfo);
                     return RedirectToAction("Index");
                 }

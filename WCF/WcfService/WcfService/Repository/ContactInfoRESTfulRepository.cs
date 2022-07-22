@@ -44,9 +44,6 @@ namespace WcfService.Repository
             {
                 using (var db = new SqlConnection(DBConnectString))
                 {
-                    objContactInfoModel.IsEnable = true;
-                    objContactInfoModel.CreateTime = DateTime.Now;
-
                     long? lContactInfoID = db.Insert<ContactInfoModel>(objContactInfoModel);
 
                     objContactInfoModel.ContactInfoID = Convert.ToInt64(lContactInfoID);
@@ -69,8 +66,6 @@ namespace WcfService.Repository
             {
                 using (var db = new SqlConnection(DBConnectString))
                 {
-                    objContactInfoModel.UpdateTime = DateTime.Now;
-
                     db.Update<ContactInfoModel>(objContactInfoModel);
                 }
                 bolResult = true;

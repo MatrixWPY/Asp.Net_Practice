@@ -113,8 +113,6 @@ namespace WcfService.Repository
             {
                 using (var db = new LocalDBEntities())
                 {
-                    objContactInfo.IsEnable = true;
-                    objContactInfo.CreateTime = DateTime.Now;
                     db.Tbl_ContactInfo.Add(objContactInfo);
                     db.SaveChanges();
                 }
@@ -137,7 +135,6 @@ namespace WcfService.Repository
                 using (var db = new LocalDBEntities())
                 {
                     Tbl_ContactInfo objOrgContactInfo = db.Tbl_ContactInfo.Find(objContactInfo.ContactInfoID);
-                    objContactInfo.UpdateTime = DateTime.Now;
                     db.Entry(objOrgContactInfo).CurrentValues.SetValues(objContactInfo);
                     db.SaveChanges();
                 }

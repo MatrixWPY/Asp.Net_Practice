@@ -81,6 +81,8 @@ namespace WebMVC.Controllers
                     objContactInfoModel.Age = objCreateEditVM.Age;
                     objContactInfoModel.PhoneNo = objCreateEditVM.PhoneNo.Trim();
                     objContactInfoModel.Address = objCreateEditVM.Address.Trim();
+                    objContactInfoModel.IsEnable = true;
+                    objContactInfoModel.CreateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     clientDB.AddContactInfo(objContactInfoModel);
@@ -126,6 +128,7 @@ namespace WebMVC.Controllers
                 ContactInfoModel objContactInfoModel = clientDB.GetContactInfo(lContactInfoID);
                 if (null != objContactInfoModel && TryUpdateModel<ContactInfoModel>(objContactInfoModel, "", objFormCollection.AllKeys, new string[] { "ContactInfoID", "CreateTime", "UpdateTime" }))
                 {
+                    objContactInfoModel.UpdateTime = DateTime.Now;
                     clientDB.UpdateContactInfo(objContactInfoModel);
                     return RedirectToAction("Index");
                 }
@@ -190,6 +193,8 @@ namespace WebMVC.Controllers
                     objContactInfoModel.Age = objCreateEditVM.Age;
                     objContactInfoModel.PhoneNo = objCreateEditVM.PhoneNo.Trim();
                     objContactInfoModel.Address = objCreateEditVM.Address.Trim();
+                    objContactInfoModel.IsEnable = true;
+                    objContactInfoModel.CreateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     clientDB.AddContactInfo(objContactInfoModel);
@@ -236,6 +241,8 @@ namespace WebMVC.Controllers
                     objContactInfoModel.Age = objCreateEditVM.Age;
                     objContactInfoModel.PhoneNo = objCreateEditVM.PhoneNo.Trim();
                     objContactInfoModel.Address = objCreateEditVM.Address.Trim();
+                    objContactInfoModel.IsEnable = true;
+                    objContactInfoModel.CreateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     clientDB.AddContactInfo(objContactInfoModel);
@@ -287,6 +294,9 @@ namespace WebMVC.Controllers
                     objContactInfoModel.Age = objCreateEditVM.Age;
                     objContactInfoModel.PhoneNo = objCreateEditVM.PhoneNo.Trim();
                     objContactInfoModel.Address = objCreateEditVM.Address.Trim();
+                    objContactInfoModel.IsEnable = true;
+                    objContactInfoModel.CreateTime = DateTime.Now;
+                    objContactInfoModel.UpdateTime = DateTime.Now;
 
                     DBServiceClient clientDB = new DBServiceClient();
                     clientDB.AddUpdateContactInfo(objContactInfoModel);
