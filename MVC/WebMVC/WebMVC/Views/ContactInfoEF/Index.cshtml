@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebMVC.Models.Data.Tbl_ContactInfo>
+
+@section Style
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet">
+}
+
+<p>
+    @Html.ActionLink("Create", "Create")
+</p>
+<div class="col-lg-3">
+    <input type="text" placeholder="Name" id="txtName" class="form-control">
+</div>
+<div class="col-lg-3">
+    <input type="text" placeholder="Nickname" id="txtNickname" class="form-control">
+</div>
+<div class="col-lg-2">
+    <button id="btnSearch" class="btn btn-warning pull-right" type="button"><i class="fa fa-search"></i>Search</button>
+</div>
+<table id="dtContactInfo" class="table" data-order="[[0,&quot;asc&quot;]]" width="100%">
+    <thead>
+        <tr>
+            <th data-data="ContactInfoID" data-visible="false">ContactInfoID</th>
+            <th data-data="Name">Name</th>
+            <th data-data="Nickname">Nickname</th>
+            <th data-data="Gender">Gender</th>
+            <th data-data="Age">Age</th>
+            <th data-data="PhoneNo" data-orderable="false">PhoneNo</th>
+            <th data-data="Address" data-orderable="false">Address</th>
+            <th data-orderable="false"></th>
+        </tr>
+    </thead>
+</table>
+
+@section Script
+{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var dtContactInfo = $("#dtContactInfo").DataTable({
+                serverSide: true,
+                processing: true,
+                searching: false,
+                lengthChange: false,
+                ajax: {
+                    type: "POST",
+                    url: "@Url.Action("Index", "ContactInfoEF")",
+                    headers: {
+                        "RequestVerificationToken": "@CommonRazorFunctions.GetAntiForgeryToken()"
+                    },
+                    data: function (data) {
+                        data.Name = $("#txtName").val();
+                        data.Nickname = $("#txtNickname").val();
+                    },
+                    dataSrc: function (result) {
+                        if (null != result.error)
+                        {
+                            alert("Fail!");
+                            console.log(result.error);
+                        }
+                        else
+                        {
+                            return result.data;
+                        }
+                    }
+                },
+                columnDefs: [
+                    {
+                        targets: 3,//Gender
+                        render: function (data, type, full, meta) {
+                            var GenderText;
+                            switch (full.Gender) {
+                                case 0:
+                                    GenderText = "Female";
+                                    break;
+                                case 1:
+                                    GenderText = "Male";
+                                    break;
+                                default:
+                                    GenderText = "";
+                                    break;
+                            }
+                            return GenderText;
+                        }
+                    },
+                    {
+                        targets: -1,//-1表示最后一行
+                        render: function (data, type, full, meta) {
+                            var PK = full.ContactInfoID;
+                            var DetailsUrl = '@Url.Action("Details", "ContactInfoEF")?id=' + PK;
+                            var EditUrl = '@Url.Action("Edit", "ContactInfoEF")?id=' + PK;
+                            var DeleteUrl = '@Url.Action("Delete", "ContactInfoEF")?id=' + PK;
+                            return '<a class="btn btn-sm btn-info" href="' + DetailsUrl + '">Details<i class="fa fa-cogs"></i></a>' +
+                                    '<a class="btn btn-sm btn-info" href="' + EditUrl + '">Edit<i class="fa fa-cogs"></i></a>' +
+                                    '<a class="btn btn-sm btn-info" href="' + DeleteUrl + '">Delete<i class="fa fa-trash"></i></a>';
+                        }
+                    }
+                ]
+            });
+
+            $("#btnSearch").click(function () {
+                dtContactInfo.ajax.reload();
+            });
+        });
+    </script>
+}

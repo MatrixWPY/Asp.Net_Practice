@@ -51,10 +51,19 @@
     <Reference Include="Dapper.SimpleCRUD, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.SimpleCRUD.2.2.0.1\lib\netstandard2.0\Dapper.SimpleCRUD.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -129,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContactInfoController.cs" />
+    <Compile Include="Controllers\ContactInfoEFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\AjaxValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -136,9 +146,30 @@
     </Compile>
     <Compile Include="Models\Data\ContactInfoData.cs" />
     <Compile Include="Models\Data\ContactInfoExData.cs" />
+    <Compile Include="Models\Data\LocalDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\LocalDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\LocalDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Data\QueryBaseData.cs" />
+    <Compile Include="Models\Data\Tbl_ContactInfo.cs">
+      <DependentUpon>LocalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repository\ContactInfoEFRepository.cs" />
     <Compile Include="Models\Repository\ContactInfoRepository.cs" />
     <Compile Include="Models\Repository\DapperBaseRepository.cs" />
+    <Compile Include="ViewModel\ContactInfoEF\CreateEditVM.cs" />
+    <Compile Include="ViewModel\ContactInfoEF\IndexVM.cs" />
     <Compile Include="ViewModel\ContactInfo\IndexVM.cs" />
     <Compile Include="ViewModel\DataTableReqVM.cs" />
     <Compile Include="ViewModel\DataTableResVM.cs" />
@@ -310,12 +341,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Data\LocalDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LocalDB.Context.cs</LastGenOutput>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Data\LocalDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+      <LastGenOutput>LocalDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\CommonRazorFunctions.cshtml" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <EntityDeploy Include="Models\Data\LocalDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LocalDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Data\LocalDB.edmx.diagram">
+      <DependentUpon>LocalDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -423,6 +471,11 @@
     <Content Include="Views\ContactInfo\Edit.cshtml" />
     <Content Include="Views\ContactInfo\Delete.cshtml" />
     <Content Include="Views\ContactInfo\CreateUpdate.cshtml" />
+    <Content Include="Views\ContactInfoEF\Index.cshtml" />
+    <Content Include="Views\ContactInfoEF\Details.cshtml" />
+    <Content Include="Views\ContactInfoEF\Create.cshtml" />
+    <Content Include="Views\ContactInfoEF\Edit.cshtml" />
+    <Content Include="Views\ContactInfoEF\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -439,6 +492,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
