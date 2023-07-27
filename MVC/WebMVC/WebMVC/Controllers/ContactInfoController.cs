@@ -62,7 +62,7 @@ namespace WebMVC.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new ContactInfoData());
         }
 
         [HttpPost]
@@ -234,7 +234,7 @@ namespace WebMVC.Controllers
 
         public ActionResult CreateUpdate()
         {
-            return View();
+            return View(new ContactInfoData());
         }
 
         [HttpPost]
