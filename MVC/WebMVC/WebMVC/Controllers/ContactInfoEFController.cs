@@ -63,7 +63,7 @@ namespace WebMVC.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new CreateEditVM());
         }
 
         [HttpPost]
